@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { StorageService, STORAGE_KEYS } from './storage.service';
 import { User, AuthResponse } from '../models/user.model';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
   private http = inject(HttpClient);
   private storage = inject(StorageService);
+  private router = inject(Router);
 
   private currentUserSubject = new BehaviorSubject<User | null>(this.storage.getItem<User>(STORAGE_KEYS.CURRENT_USER));
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -33,6 +35,7 @@ export class AuthService {
     this.storage.clearAuth();
     this.currentUserSubject.next(null);
     this.currentUser.set(null);
+    this.router.navigate(['/auth/login']);
   }
 
   private setAuthData(response: AuthResponse): void {
