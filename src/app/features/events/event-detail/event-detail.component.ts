@@ -54,13 +54,13 @@ import { PerformanceAverage } from '../../../core/models/performance.model';
           <button
             mat-icon-button
             (click)="goBack()"
-            class="absolute top-4 left-4 z-50 bg-black/30 backdrop-blur-md text-white border border-white/20"
+            class="absolute top-4 left-4 z-50 bg-black/30 backdrop-blur-md text-white border border-white/20 z-10"
           >
             <mat-icon>arrow_back</mat-icon>
           </button>
 
           <!-- Badges -->
-          <div class="absolute top-4 right-4 flex gap-2 z-50">
+          <div class="absolute top-4 right-4 flex gap-2 z-50 items-center">
             <div
               class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-xs font-bold text-primary uppercase shadow-lg"
             >
