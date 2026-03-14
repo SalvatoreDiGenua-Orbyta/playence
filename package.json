@@ -6,6 +6,7 @@
     "start": "ng serve --open",
     "start:local": "ng serve --host 0.0.0.0 --open",
     "start:mock": "ng serve --configuration=mock --open",
+    "start:mock-local": "ng serve --configuration=mock --host 0.0.0.0 --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -196,11 +196,11 @@ export function makeServer() {
       });
 
       this.get('/users/:id/tickets', (schema: any, request) => {
-        return schema.where('ticket', { userId: request.params['id'] });
+        return schema.where('ticket', { userId: request.params['id'] }).models;
       });
 
       this.get('/users/:id/performances', (schema: any, request) => {
-        return schema.where('performance', { userId: request.params['id'] });
+        return schema.where('performance', { userId: request.params['id'] }).models;
       });
 
       this.get('/events/:id/performances/average', (schema: any, request) => {
