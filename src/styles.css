@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@source "./app";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@import '@angular/material/prebuilt-themes/azure-blue.css';
+
+@theme {
+  --color-primary: #00d4ff;
+  --color-primary-dark: #0099bb;
+  --color-accent: #ff6b35;
+  --color-background: #0a0a0f;
+  --color-surface: #13131a;
+  --color-surface-elevated: #1c1c26;
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #8888aa;
+  --color-success: #00e676;
+  --color-warning: #ffd600;
+  --color-vip-gold: #ffd700;
+  --color-border: rgba(255, 255, 255, 0.08);
+}
+
+:root {
+  --primary: var(--color-primary);
+  --primary-dark: var(--color-primary-dark);
+  --accent: var(--color-accent);
+  --background: var(--color-background);
+  --surface: var(--color-surface);
+  --surface-elevated: var(--color-surface-elevated);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --success: var(--color-success);
+  --warning: var(--color-warning);
+  --vip-gold: var(--color-vip-gold);
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+.mat-icon, .material-icons {
+  font-family: 'Material Icons' !important;
+}

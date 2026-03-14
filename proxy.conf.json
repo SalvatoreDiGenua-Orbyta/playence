@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "http://localhost:4200",
+    "secure": false,
+    "pathRewrite": { "^/api": "/api" },
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "headers": {
+      "X-Mock-Backend": "true"
+    }
+  }
+}
