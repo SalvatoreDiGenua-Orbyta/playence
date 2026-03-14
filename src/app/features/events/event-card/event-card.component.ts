@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { NgOptimizedImage, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -92,7 +92,7 @@ import { cardExpandAnimation } from '../../../core/animations/animations';
             <div class="flex justify-between text-xs text-text-secondary mb-1">
               <span
                 >Posti disponibili:
-                {{ event().maxParticipants - event().currentParticipants }}</span
+                {{ avaliableSpots() }}</span
               >
               <span class="font-mono"
                 >{{ event().currentParticipants }}/{{ event().maxParticipants }}</span
@@ -121,4 +121,8 @@ import { cardExpandAnimation } from '../../../core/animations/animations';
 export class EventCardComponent {
   readonly event = input.required<SportEvent>();
   readonly cardClick = output<string>();
+  readonly avaliableSpots = computed(() => {
+    const result = this.event().maxParticipants - this.event().currentParticipants;
+    return result > 0 ? result : 0;
+  });
 }

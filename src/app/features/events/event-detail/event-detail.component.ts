@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { NgOptimizedImage, NgClass, NgStyle, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -260,7 +260,7 @@ import { PerformanceAverage } from '../../../core/models/performance.model';
             <div class="flex flex-col">
               <span class="text-text-secondary text-sm"
                 >Posti rimanenti:
-                {{ event()!.maxParticipants - event()!.currentParticipants }}</span
+                {{ avaliableSpots() }}</span
               >
               <span class="text-3xl font-black text-white">€{{ event()!.cost }}</span>
             </div>
@@ -297,6 +297,11 @@ export class EventDetailComponent implements OnInit {
 
   scrollY = signal(0);
   private startY = 0;
+
+  readonly avaliableSpots = computed(() => {
+    const result = this.event()!.maxParticipants - this.event()!.currentParticipants;
+    return result > 0 ? result : 0;
+  });
 
   ngOnInit() {
     window.addEventListener('scroll', this.onWindowScroll.bind(this));
