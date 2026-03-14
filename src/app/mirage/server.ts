@@ -103,9 +103,6 @@ export function makeServer() {
         } as any);
 
         // Evento 2: Vecchio di 8 mesi (dati bloccati in UI come simulazione storico account gratuito/premium)
-        const oldDate = new Date();
-        oldDate.setMonth(oldDate.getMonth() - 8);
-
         server.create('ticket', {
           userId: testUser.id,
           eventId: allEvents[1].id,
@@ -116,7 +113,7 @@ export function makeServer() {
         server.create('performance', {
           userId: testUser.id,
           eventId: allEvents[1].id,
-          date: oldDate.toISOString(),
+          date: new Date('10/02/2025').toISOString(),
           performanceScore: 72,
           heartRateAvg: 160,
           heartRateMax: 195,
