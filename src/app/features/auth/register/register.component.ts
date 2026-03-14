@@ -38,7 +38,7 @@ import { AuthService } from '../../../core/services/auth.service';
           >
             Crea Account
           </h1>
-          <p class="text-text-secondary">Unisciti alla community di SportCoach</p>
+          <p class="text-text-secondary">Unisciti alla community di Playence</p>
         </div>
 
         @if (errorMsg()) {

@@ -310,10 +310,6 @@ export class TicketSuccessDialogComponent {
                   (click)="submitPurchase()"
                   class="w-full !rounded-2xl py-7 text-xl font-black transition-all disabled:opacity-50 disabled:cursor-not-allowed group border border-white/5 relative overflow-hidden !bg-accent !text-white hover:shadow-[0_0_25px_rgba(255,107,53,0.5)]"
                 >
-                  <div
-                    class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"
-                  ></div>
-
                   <div class="flex items-center justify-center relative z-10">
                     @if (isPurchasing()) {
                       <mat-icon class="animate-spin mr-2">autorenew</mat-icon> Elaborazione

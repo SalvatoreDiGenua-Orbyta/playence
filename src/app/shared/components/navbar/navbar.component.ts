@@ -20,7 +20,7 @@ import { AuthService } from '../../../core/services/auth.service';
             <span
               class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent tracking-tighter"
             >
-              SPORTCOACH
+              PLAYENCE
             </span>
           </div>
 

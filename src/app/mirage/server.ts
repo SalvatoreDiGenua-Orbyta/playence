@@ -70,7 +70,7 @@ export function makeServer() {
       });
 
       const testUser = server.create('user', {
-        email: 'test@sportcoach.it',
+        email: 'test@playence.it',
         password: 'password123',
         name: 'Mario Rossi',
         phone: '+39 333 1234567',
@@ -84,7 +84,7 @@ export function makeServer() {
         server.create('ticket', {
           userId: testUser.id,
           eventId: allEvents[0].id,
-          participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@sportcoach.it' },
+          participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@playence.it' },
           status: 'confirmed'
         } as any);
 
@@ -109,7 +109,7 @@ export function makeServer() {
         server.create('ticket', {
           userId: testUser.id,
           eventId: allEvents[1].id,
-          participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@sportcoach.it' },
+          participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@playence.it' },
           status: 'confirmed'
         } as any);
 
