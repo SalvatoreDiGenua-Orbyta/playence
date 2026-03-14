@@ -23,7 +23,7 @@ import { EventFilters, SportEvent } from '../../../core/models/event.model';
     EventFiltersComponent,
   ],
   template: `
-    <div class="flex flex-col max-w-lg mx-auto h-[calc(100vh-4rem)]">
+    <div class="flex flex-col max-w-lg mx-auto h-[calc(100dvh-4rem)]">
 
       <!-- Cards area -->
       <div class="relative flex-1 overflow-hidden">

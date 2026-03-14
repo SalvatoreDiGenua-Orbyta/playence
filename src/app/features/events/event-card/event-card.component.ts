@@ -10,7 +10,7 @@ import { SportEvent } from '../../../core/models/event.model';
   host: { class: 'block w-full h-full cursor-pointer snap-center' },
   template: `
     <div
-      class="relative w-full h-[85vh] rounded-3xl overflow-hidden shadow-2xl group"
+      class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl group"
       (click)="cardClick.emit(event().id)"
     >
       <!-- Background Image -->
