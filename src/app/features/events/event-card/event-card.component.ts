@@ -60,7 +60,7 @@ import { SportEvent } from '../../../core/models/event.model';
             </div>
             <div>
               <div class="text-sm font-bold text-white leading-tight">{{ event().coach.name }}</div>
-              <div class="text-xs text-text-secondary flex items-center">
+              <div class="text-xs text-white/70 flex items-center">
                 <mat-icon class="text-warning scale-[0.6] origin-left">star</mat-icon>
                 <span class="ml-[-4px]">{{ event().coach.rating }}</span>
               </div>
@@ -69,7 +69,7 @@ import { SportEvent } from '../../../core/models/event.model';
         }
 
         <!-- Details Row -->
-        <div class="flex flex-wrap gap-4 mb-5 text-sm font-medium text-text-secondary">
+        <div class="flex flex-wrap gap-4 mb-5 text-sm font-semibold text-white/85">
           <div class="flex items-center bg-white/5 px-3 py-1.5 rounded-lg">
             <mat-icon class="scale-75 mr-1 text-primary">calendar_today</mat-icon>
             {{ event().date | date: 'dd MMM yyyy, HH:mm' }}
@@ -86,7 +86,7 @@ import { SportEvent } from '../../../core/models/event.model';
 
         <div class="flex justify-between items-end">
           <div class="flex-1 mr-4">
-            <div class="flex justify-between text-xs text-text-secondary mb-1">
+            <div class="flex justify-between text-xs text-white/70 mb-1">
               <span
                 >Posti disponibili:
                 {{ avaliableSpots() }}</span
@@ -103,7 +103,7 @@ import { SportEvent } from '../../../core/models/event.model';
             </div>
           </div>
           <div class="text-right">
-            <div class="text-[10px] text-text-secondary uppercase tracking-widest mb-1">Costo</div>
+            <div class="text-[10px] text-white/70 uppercase tracking-widest mb-1">Costo</div>
             <div
               class="text-2xl font-black text-white bg-white/10 px-4 py-1 rounded-xl border border-white/20"
             >

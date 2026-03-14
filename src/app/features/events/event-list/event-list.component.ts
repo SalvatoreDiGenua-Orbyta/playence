@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal, computed, HostListener } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,94 +21,118 @@ import { EventFilters, SportEvent } from '../../../core/models/event.model';
     MatBadgeModule,
     EventCardComponent,
     EventFiltersComponent,
-    NgClass,
   ],
   template: `
-    <div class="relative max-w-lg mx-auto h-[calc(100vh-6rem)] overflow-hidden">
-      <!-- Toolbar -->
-      <div class="flex justify-between items-center mb-4 px-2">
-        <h1 class="text-3xl font-black text-white tracking-tight">Esplora</h1>
+    <div class="flex flex-col max-w-lg mx-auto h-[calc(100vh-4rem)]">
+
+      <!-- Cards area -->
+      <div class="relative flex-1 overflow-hidden">
+
+        <!-- Filters Panel -->
+        @if (showFilters()) {
+          <div
+            class="absolute inset-x-0 bottom-0 top-0 z-50 bg-background/95 backdrop-blur-3xl p-6 rounded-t-3xl border-t border-white/10 shadow-2xl"
+          >
+            <app-event-filters
+              [currentFilters]="filters()"
+              (filtersChanged)="applyFilters($event)"
+              (close)="toggleFilters()"
+            />
+          </div>
+        }
+
+        <!-- Event Swiper -->
+        @if (isLoading()) {
+          <div class="h-full flex items-center justify-center">
+            <mat-spinner diameter="48" class="!stroke-accent" />
+          </div>
+        } @else if (events().length === 0) {
+          <div
+            class="h-full flex flex-col items-center justify-center text-center p-6 bg-surface/30 rounded-3xl border border-white/5 mx-2"
+          >
+            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4">
+              <mat-icon class="scale-[2] text-text-secondary">search_off</mat-icon>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Nessun evento trovato</h3>
+            <p class="text-text-secondary text-sm mb-6 max-w-[250px]">
+              Prova a modificare i filtri o la tua ricerca per vedere più risultati.
+            </p>
+            <button
+              mat-flat-button
+              color="accent"
+              class="!bg-accent text-white !rounded-full px-6 py-2"
+              (click)="resetFilters()"
+            >
+              Reimposta filtri
+            </button>
+          </div>
+        } @else {
+          <div
+            class="h-full overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar px-2"
+            (scroll)="onScroll($event)"
+            (touchstart)="onTouchStart($event)"
+            (touchend)="onTouchEnd($event)"
+          >
+            @for (event of events(); track event.id; let i = $index) {
+              <div class="snap-start snap-always h-full pb-3 flex items-center">
+                <app-event-card [event]="event" (cardClick)="viewDetail($event)" />
+              </div>
+            }
+          </div>
+
+          <!-- Pagination Dots -->
+          <div
+            class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10 pointer-events-none drop-shadow-lg"
+          >
+            @for (event of events(); track event.id; let i = $index) {
+              <div
+                class="w-1.5 rounded-full transition-all duration-300"
+                [class]="
+                  i === currentIndex()
+                    ? 'h-8 bg-accent shadow-[0_0_10px_rgba(255,107,53,0.8)]'
+                    : 'h-2 bg-white/30'
+                "
+              ></div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Bottom Action Bar -->
+      <div
+        class="flex items-center justify-between px-5 py-3 bg-surface/80 backdrop-blur-md border-t border-white/10 shrink-0"
+      >
+        <!-- Left: filter button -->
         <button
           mat-icon-button
           (click)="toggleFilters()"
-          class="text-text-primary bg-surface border border-white/10"
+          class="!text-text-primary !bg-white/5 !border !border-white/10 !rounded-xl !w-12 !h-12"
           [matBadge]="activeFiltersCount()"
           matBadgePosition="above after"
           matBadgeColor="warn"
           [matBadgeHidden]="activeFiltersCount() === 0"
+          aria-label="Apri filtri"
         >
           <mat-icon>tune</mat-icon>
         </button>
-      </div>
 
-      <!-- Filters Panel -->
-      @if (showFilters()) {
-        <div
-          class="absolute inset-x-0 bottom-0 top-12 z-50 bg-background/95 backdrop-blur-3xl p-6 rounded-t-3xl border-t border-white/10 shadow-2xl transition-transform"
-        >
-          <app-event-filters
-            [currentFilters]="filters()"
-            (filtersChanged)="applyFilters($event)"
-            (close)="toggleFilters()"
-          />
-        </div>
-      }
-
-      <!-- Event Swiper -->
-      @if (isLoading()) {
-        <div class="h-[80vh] flex items-center justify-center">
-          <mat-spinner diameter="48" class="!stroke-accent" />
-        </div>
-      } @else if (events().length === 0) {
-        <div
-          class="h-[80vh] flex flex-col items-center justify-center text-center p-6 bg-surface/30 rounded-3xl border border-white/5 mx-2"
-        >
-          <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4">
-            <mat-icon class="scale-[2] text-text-secondary">search_off</mat-icon>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">Nessun evento trovato</h3>
-          <p class="text-text-secondary text-sm mb-6 max-w-[250px]">
-            Prova a modificare i filtri o la tua ricerca per vedere più risultati.
-          </p>
+        <!-- Center: active filters label -->
+        @if (activeFiltersCount() > 0) {
+          <span class="text-xs text-text-secondary">
+            {{ activeFiltersCount() }} filtri attivi
+          </span>
           <button
-            mat-flat-button
-            color="accent"
-            class="!bg-accent text-white !rounded-full px-6 py-2"
+            mat-button
             (click)="resetFilters()"
+            class="!text-accent !text-xs"
           >
-            Reimposta filtri
+            Reimposta
           </button>
-        </div>
-      } @else {
-        <div
-          class="h-[80vh] overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar px-2"
-          (scroll)="onScroll($event)"
-          (touchstart)="onTouchStart($event)"
-          (touchend)="onTouchEnd($event)"
-        >
-          @for (event of events(); track event.id; let i = $index) {
-            <div class="snap-start snap-always h-[80vh] pb-4 flex items-center">
-              <app-event-card [event]="event" (cardClick)="viewDetail($event)" />
-            </div>
-          }
-        </div>
-
-        <!-- Pagination Dots -->
-        <div
-          class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10 pointer-events-none drop-shadow-lg"
-        >
-          @for (event of events(); track event.id; let i = $index) {
-            <div
-              class="w-1.5 rounded-full transition-all duration-300"
-              [ngClass]="
-                i === currentIndex()
-                  ? 'h-8 bg-accent shadow-[0_0_10px_rgba(255,107,53,0.8)]'
-                  : 'h-2 bg-white/30'
-              "
-            ></div>
-          }
-        </div>
-      }
+        } @else {
+          <span class="text-xs text-text-secondary">Scorri per esplorare</span>
+          <div class="w-10"></div>
+        }
+      </div>
     </div>
   `,
   styles: [

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use './material-theme';
 
-@import "tailwindcss";
+@import 'tailwindcss';
 @source "./app";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
@@ -45,6 +45,11 @@ body {
   color-scheme: dark;
 }
 
-.mat-icon, .material-icons {
+.mat-icon,
+.material-icons {
   font-family: 'Material Icons' !important;
+}
+
+html {
+  overflow: hidden;
 }
