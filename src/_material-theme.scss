@@ -1,0 +1,53 @@
+@use '@angular/material' as mat;
+
+// Include Material core styles (typography, overlay, etc.) — emit only once
+@include mat.core();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Playence custom M3 theme
+//
+// Primary  → cyan  (#00d4ff)  → closest built-in palette: $cyan-palette
+// Tertiary → orange (#ff6b35) → closest built-in palette: $orange-palette
+// Color scheme: dark (matches the app's #0a0a0f background)
+// ─────────────────────────────────────────────────────────────────────────────
+$playence-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$cyan-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: (
+      brand-family: 'Inter, system-ui, sans-serif',
+      plain-family: 'Inter, system-ui, sans-serif',
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+:root {
+  @include mat.all-component-themes($playence-theme);
+
+  // ── Override M3 surface tokens to match the app's own dark palette ──────────
+  // M3 generates its own surface/background colours from the seed; we override
+  // them to keep pixel-perfect consistency with the Tailwind palette.
+  --mat-sys-background: #0a0a0f;
+  --mat-sys-surface: #13131a;
+  --mat-sys-surface-container: #13131a;
+  --mat-sys-surface-container-low: #0f0f16;
+  --mat-sys-surface-container-high: #1c1c26;
+  --mat-sys-surface-container-highest: #22222f;
+  --mat-sys-surface-bright: #1c1c26;
+  --mat-sys-surface-dim: #0a0a0f;
+
+  // On-surface (text) colours
+  --mat-sys-on-background: #f0f0f5;
+  --mat-sys-on-surface: #f0f0f5;
+  --mat-sys-on-surface-variant: #8888aa;
+
+  // Outline / border colours
+  --mat-sys-outline: rgba(255, 255, 255, 0.2);
+  --mat-sys-outline-variant: rgba(255, 255, 255, 0.1);
+}

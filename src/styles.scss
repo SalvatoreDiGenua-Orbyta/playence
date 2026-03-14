@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@use './material-theme';
+
 @import "tailwindcss";
 @source "./app";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
-
-@import '@angular/material/prebuilt-themes/azure-blue.css';
 
 @theme {
   --color-primary: #00d4ff;

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, inject, output } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
@@ -14,11 +14,18 @@ import { EventFilters } from '../../../core/models/event.model';
 
 @Component({
   selector: 'app-event-filters',
-  standalone: true,
+
   imports: [
-    CommonModule, FormsModule, MatSelectModule, MatSliderModule, MatButtonToggleModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSlideToggleModule,
-    MatButtonModule, MatIconModule
+    FormsModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   template: `
     <div class="h-full flex flex-col">
@@ -30,7 +37,6 @@ import { EventFilters } from '../../../core/models/event.model';
       </div>
 
       <div class="flex-1 overflow-y-auto space-y-6 pb-20 pr-2">
-        
         <!-- Sport -->
         <div>
           <label class="block text-sm text-text-secondary mb-2">Sport</label>
@@ -48,21 +54,32 @@ import { EventFilters } from '../../../core/models/event.model';
         <div>
           <div class="flex justify-between text-sm mb-2">
             <label class="text-text-secondary">Range di prezzo</label>
-            <span class="text-accent font-bold">€{{ filters.minCost || 0 }} - €{{ filters.maxCost || 1000 }}</span>
+            <span class="text-accent font-bold"
+              >€{{ filters.minCost || 0 }} - €{{ filters.maxCost || 1000 }}</span
+            >
           </div>
           <mat-slider min="0" max="1000" step="10" class="w-full">
-            <input matSliderStartThumb [(ngModel)]="filters.minCost">
-            <input matSliderEndThumb [(ngModel)]="filters.maxCost">
+            <input matSliderStartThumb [(ngModel)]="filters.minCost" />
+            <input matSliderEndThumb [(ngModel)]="filters.maxCost" />
           </mat-slider>
         </div>
 
         <!-- Esperienza -->
         <div>
           <label class="block text-sm text-text-secondary mb-2">Livello Esperienza</label>
-          <mat-button-toggle-group [(ngModel)]="filters.experience" class="w-full flex mx-0 bg-surface border-white/10 rounded-xl overflow-hidden">
-            <mat-button-toggle value="Principiante" class="flex-1 !bg-transparent text-white/70">Principiante</mat-button-toggle>
-            <mat-button-toggle value="Intermedio" class="flex-1 !bg-transparent text-white/70">Intermedio</mat-button-toggle>
-            <mat-button-toggle value="Avanzato" class="flex-1 !bg-transparent text-white/70">Avanzato</mat-button-toggle>
+          <mat-button-toggle-group
+            [(ngModel)]="filters.experience"
+            class="w-full flex mx-0 bg-surface border-white/10 rounded-xl overflow-hidden"
+          >
+            <mat-button-toggle value="Principiante" class="flex-1 !bg-transparent text-white/70"
+              >Principiante</mat-button-toggle
+            >
+            <mat-button-toggle value="Intermedio" class="flex-1 !bg-transparent text-white/70"
+              >Intermedio</mat-button-toggle
+            >
+            <mat-button-toggle value="Avanzato" class="flex-1 !bg-transparent text-white/70"
+              >Avanzato</mat-button-toggle
+            >
           </mat-button-toggle-group>
         </div>
 
@@ -81,39 +98,57 @@ import { EventFilters } from '../../../core/models/event.model';
         </div>
 
         <!-- VIP -->
-        <div class="flex items-center justify-between bg-surface p-4 rounded-xl border border-white/10">
+        <div
+          class="flex items-center justify-between bg-surface p-4 rounded-xl border border-white/10"
+        >
           <div>
             <div class="font-bold text-white flex items-center">
               Eventi VIP <mat-icon class="scale-[0.6] text-vip-gold ml-1">star</mat-icon>
             </div>
             <div class="text-xs text-text-secondary">Solo coach certificati VIP</div>
           </div>
-          <mat-slide-toggle [(ngModel)]="filters.hasVip" color="accent"></mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="filters.hasVip" color="accent" />
         </div>
-
       </div>
 
       <!-- Action Buttons -->
-      <div class="mt-auto pt-4 flex gap-4 bg-background z-10 sticky bottom-0 border-t border-white/10">
+      <div
+        class="mt-auto pt-4 flex gap-4 bg-background z-10 sticky bottom-0 border-t border-white/10"
+      >
         <button mat-button class="flex-1 border border-white/10 text-white" (click)="reset()">
           Azzera
         </button>
-        <button mat-flat-button color="accent" class="flex-1 !bg-accent text-white" (click)="apply()">
+        <button
+          mat-flat-button
+          color="accent"
+          class="flex-1 !bg-accent text-white"
+          (click)="apply()"
+        >
           Applica Filtri
         </button>
       </div>
     </div>
-  `
+  `,
 })
 export class EventFiltersComponent {
   @Input() set currentFilters(val: EventFilters) {
     this.filters = { ...val };
   }
-  @Output() filtersChanged = new EventEmitter<EventFilters>();
-  @Output() close = new EventEmitter<void>();
+  readonly filtersChanged = output<EventFilters>();
+  readonly close = output<void>();
 
   filters: EventFilters = {};
-  sports = ['Calcio', 'Tennis', 'Nuoto', 'Ciclismo', 'Pallacanestro', 'Padel', 'Running', 'Yoga', 'CrossFit'];
+  sports = [
+    'Calcio',
+    'Tennis',
+    'Nuoto',
+    'Ciclismo',
+    'Pallacanestro',
+    'Padel',
+    'Running',
+    'Yoga',
+    'CrossFit',
+  ];
 
   apply() {
     this.filtersChanged.emit(this.filters);
