@@ -3,13 +3,10 @@ import { NgOptimizedImage, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { SportEvent } from '../../../core/models/event.model';
-import { cardExpandAnimation } from '../../../core/animations/animations';
 
 @Component({
   selector: 'app-event-card',
-
   imports: [MatIconModule, MatChipsModule, NgOptimizedImage, DatePipe],
-  animations: [cardExpandAnimation],
   host: { class: 'block w-full h-full cursor-pointer snap-center' },
   template: `
     <div
@@ -39,7 +36,7 @@ import { cardExpandAnimation } from '../../../core/animations/animations';
         </div>
         @if (event().hasVip) {
           <div
-            class="flex items-center bg-vip-gold/20 backdrop-blur-md px-3 py-1 rounded-full border border-vip-gold/50 shadow-[0_0_15px_rgba(255,215,0,0.3)] animate-pulse"
+            class="flex items-center bg-vip-gold/20 backdrop-blur-md px-3 py-1 rounded-full border border-vip-gold/50 shadow-[0_0_15px_rgba(255,215,0,0.3)]"
           >
             <mat-icon class="text-vip-gold scale-75 mr-1">star</mat-icon>
             <span class="text-vip-gold text-xs font-bold uppercase">VIP Coach</span>
