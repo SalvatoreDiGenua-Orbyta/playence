@@ -17,6 +17,7 @@ import { AuthService } from '../../../core/services/auth.service';
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
           <div class="flex-shrink-0 flex items-center cursor-pointer" routerLink="/events">
+            <img src="logo.png" alt="" width="40" height="40"/>
             <span
               class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent tracking-tighter"
             >
