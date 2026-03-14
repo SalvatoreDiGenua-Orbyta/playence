@@ -63,10 +63,87 @@ export function makeServer() {
     },
 
     seeds(server) {
-      const coaches = server.createList('coach', 10);
+      // Coach VIP
+      const delPiero = server.create('coach', {
+        name: 'Alessandro Del Piero',
+        sport: 'Calcio',
+        bio: 'Leggenda del calcio mondiale, esperto in punizioni e tecnica individuale.',
+        isVip: true,
+        image: 'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
+        rating: 5.0,
+      } as any);
+
+      const mouratoglou = server.create('coach', {
+        name: 'Patrick Mouratoglou',
+        sport: 'Tennis',
+        bio: 'Uno dei coach più famosi al mondo, ha allenato campioni del calibro di Serena Williams.',
+        isVip: true,
+        image: 'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
+        rating: 4.9,
+      } as any);
+
+      const belinelli = server.create('coach', {
+        name: 'Marco Belinelli',
+        sport: 'Pallacanestro',
+        bio: 'Campione NBA e capitano della Virtus Bologna, specialista nel tiro da tre punti.',
+        isVip: true,
+        image: 'https://basketmagazine.net/wp-content/uploads/2025/08/IMG_6237-1200x640.jpg',
+        rating: 4.8,
+      } as any);
+
+      // Eventi VIP
+      server.create('event', {
+        title: 'Punizioni con Del Piero',
+        sport: 'Calcio',
+        cost: 175,
+        date: faker.date.future({ years: 0.1 }).toISOString(),
+        duration: 120,
+        location: 'Torino, Italia',
+        experience: 'Avanzato',
+        hasVip: true,
+        maxParticipants: 15,
+        currentParticipants: 8,
+        description: 'Una sessione esclusiva per imparare l\'arte del calcio di punizione con "Pinturicchio".',
+        coverImage: 'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
+        coach: delPiero,
+      });
+
+      server.create('event', {
+        title: 'Migliora il tuo rovescio con Patrick Mouratoglou',
+        sport: 'Tennis',
+        cost: 290,
+        date: faker.date.future({ years: 0.1 }).toISOString(),
+        duration: 240,
+        location: 'Milano, Italia',
+        experience: 'Intermedio',
+        hasVip: true,
+        maxParticipants: 10,
+        currentParticipants: 4,
+        description: 'Analisi biomeccanica e perfezionamento del rovescio con il coach dei campioni.',
+        coverImage: 'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
+        coach: mouratoglou,
+      });
+
+      server.create('event', {
+        title: 'Due tiri a canestro con Belinelli',
+        sport: 'Pallacanestro',
+        cost: 115,
+        date: faker.date.future({ years: 0.1 }).toISOString(),
+        duration: 90,
+        location: 'Roma, Italia',
+        experience: 'Agonistico',
+        hasVip: true,
+        maxParticipants: 20,
+        currentParticipants: 12,
+        description: 'Sessione di shooting e consigli tecnici dal primo italiano a vincere un anello NBA.',
+        coverImage: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800',
+        coach: belinelli,
+      });
+
+      const coaches = server.createList('coach', 7);
 
       coaches.forEach(coach => {
-        server.createList('event', faker.number.int({ min: 1, max: 4 }), { coach });
+        server.createList('event', faker.number.int({ min: 1, max: 3 }), { coach });
       });
 
       const testUser = server.create('user', {
