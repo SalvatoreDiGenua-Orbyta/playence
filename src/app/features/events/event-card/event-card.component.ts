@@ -82,6 +82,10 @@ import { SportEvent } from '../../../core/models/event.model';
             <mat-icon class="scale-75 mr-1 text-primary">schedule</mat-icon>
             {{ event().duration }} min
           </div>
+          <div class="flex items-center bg-white/5 px-3 py-1.5 rounded-lg">
+            <mat-icon class="scale-75 mr-1 text-accent">bolt</mat-icon>
+            {{ event().experience }}
+          </div>
         </div>
 
         <div class="flex justify-between items-end">
