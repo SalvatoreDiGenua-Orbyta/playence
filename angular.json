@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "hackathon-app": {
+    "playence-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -62,13 +62,13 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "hackathon-app:build:production"
+              "buildTarget": "playence-app:build:production"
             },
             "development": {
-              "buildTarget": "hackathon-app:build:development"
+              "buildTarget": "playence-app:build:development"
             },
             "mock": {
-              "buildTarget": "hackathon-app:build:mock",
+              "buildTarget": "playence-app:build:mock",
               "proxyConfig": "proxy.conf.json"
             }
           },
