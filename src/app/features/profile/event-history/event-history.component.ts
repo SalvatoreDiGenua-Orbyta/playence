@@ -86,7 +86,7 @@ import { EventsService } from '../../../core/services/events.service';
               </div>
 
               <div class="flex-1 flex flex-col justify-center">
-                <div class="flex justify-between items-start mb-2">
+                <div class="flex justify-between items-start mb-2 gap-3">
                   <h3 class="text-xl font-bold text-white">
                     {{ item.event?.title || 'Evento non disponibile' }}
                   </h3>
