@@ -82,15 +82,16 @@ import { SportEvent } from '../../../core/models/event.model';
             <mat-icon class="scale-75 mr-1 text-primary">schedule</mat-icon>
             {{ event().duration }} min
           </div>
+          <div class="flex items-center bg-white/5 px-3 py-1.5 rounded-lg">
+            <mat-icon class="scale-75 mr-1 text-accent">bolt</mat-icon>
+            {{ event().experience }}
+          </div>
         </div>
 
         <div class="flex justify-between items-end">
           <div class="flex-1 mr-4">
             <div class="flex justify-between text-xs text-white/70 mb-1">
-              <span
-                >Posti disponibili:
-                {{ avaliableSpots() }}</span
-              >
+              <span>Posti disponibili: {{ avaliableSpots() }}</span>
               <span class="font-mono"
                 >{{ event().currentParticipants }}/{{ event().maxParticipants }}</span
               >

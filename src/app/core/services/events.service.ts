@@ -10,7 +10,7 @@ export interface EventsResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsService {
   private http = inject(HttpClient);
@@ -18,7 +18,7 @@ export class EventsService {
   getEvents(filters?: EventFilters): Observable<EventsResponse> {
     let params = new HttpParams();
     if (filters) {
-      Object.keys(filters).forEach(key => {
+      Object.keys(filters).forEach((key) => {
         const value = (filters as any)[key];
         if (value !== undefined && value !== null && value !== '') {
           params = params.append(key, value.toString());

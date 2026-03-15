@@ -24,10 +24,8 @@ import { EventFilters, SportEvent } from '../../../core/models/event.model';
   ],
   template: `
     <div class="flex flex-col max-w-lg mx-auto h-[calc(100dvh-4rem)]">
-
       <!-- Cards area -->
       <div class="relative flex-1 overflow-hidden">
-
         <!-- Filters Panel -->
         @if (showFilters()) {
           <div
@@ -121,11 +119,7 @@ import { EventFilters, SportEvent } from '../../../core/models/event.model';
           <span class="text-xs text-text-secondary">
             {{ activeFiltersCount() }} filtri attivi
           </span>
-          <button
-            mat-button
-            (click)="resetFilters()"
-            class="!text-accent !text-xs"
-          >
+          <button mat-button (click)="resetFilters()" class="!text-accent !text-xs">
             Reimposta
           </button>
         } @else {

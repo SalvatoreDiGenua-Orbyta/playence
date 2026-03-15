@@ -124,116 +124,193 @@ import {
 
           <!-- Timelines Section -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="bg-surface-elevated border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-               <div class="absolute top-4 right-4"><mat-icon class="text-primary/20 scale-150">favorite</mat-icon></div>
-               <h3 class="text-lg font-bold text-white mb-6">Timeline Frequenza Cardiaca</h3>
-               <div class="h-64 w-full">
-                <canvas baseChart [data]="heartRateChartData" [options]="lineChartOptions" [type]="'line'"></canvas>
+            <div
+              class="bg-surface-elevated border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden"
+            >
+              <div class="absolute top-4 right-4">
+                <mat-icon class="text-primary/20 scale-150">favorite</mat-icon>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-6">Timeline Frequenza Cardiaca</h3>
+              <div class="h-64 w-full">
+                <canvas
+                  baseChart
+                  [data]="heartRateChartData"
+                  [options]="lineChartOptions"
+                  [type]="'line'"
+                ></canvas>
               </div>
             </div>
-            <div class="bg-surface-elevated border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-               <div class="absolute top-4 right-4"><mat-icon class="text-accent/20 scale-150">local_fire_department</mat-icon></div>
-               <h3 class="text-lg font-bold text-white mb-6">Timeline Calorie</h3>
-               <div class="h-64 w-full">
-                <canvas baseChart [data]="caloriesChartData" [options]="lineChartOptions" [type]="'line'"></canvas>
+            <div
+              class="bg-surface-elevated border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden"
+            >
+              <div class="absolute top-4 right-4">
+                <mat-icon class="text-accent/20 scale-150">local_fire_department</mat-icon>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-6">Timeline Calorie</h3>
+              <div class="h-64 w-full">
+                <canvas
+                  baseChart
+                  [data]="caloriesChartData"
+                  [options]="lineChartOptions"
+                  [type]="'line'"
+                ></canvas>
               </div>
             </div>
           </div>
 
           <!-- n8n Enrichment Section -->
-          <div class="bg-surface-elevated border-2 border-[#ffd60033] rounded-3xl overflow-hidden shadow-2xl relative">
+          <div
+            class="bg-surface-elevated border-2 border-[#ffd60033] rounded-3xl overflow-hidden shadow-2xl relative"
+          >
             <!-- Badge n8n -->
-            <div class="absolute top-6 right-6 flex items-center bg-[#1a1a0a] border border-[#ffd60033] rounded-full px-4 py-1.5">
-               <div class="w-1.5 h-1.5 bg-warning rounded-full mr-2 animate-pulse"></div>
-               <span class="text-[10px] font-black text-warning uppercase tracking-widest">Elaborato da n8n workflow</span>
+            <div
+              class="absolute top-6 right-6 flex items-center bg-[#1a1a0a] border border-[#ffd60033] rounded-full px-4 py-1.5"
+            >
+              <div class="w-1.5 h-1.5 bg-warning rounded-full mr-2 animate-pulse"></div>
+              <span class="text-[10px] font-black text-warning uppercase tracking-widest"
+                >Elaborato da n8n workflow</span
+              >
             </div>
 
             <div class="p-8 border-b border-white/5">
-               <h2 class="text-2xl font-black text-white flex items-center">
-                 <mat-icon class="text-warning mr-3">insights</mat-icon> AI Performance Insight
-               </h2>
-               <p class="text-sm text-text-secondary mt-1">Analisi avanzata generata via n8n + LLM</p>
+              <h2 class="text-2xl font-black text-white flex items-center">
+                <mat-icon class="text-warning mr-3">insights</mat-icon> AI Performance Insight
+              </h2>
+              <p class="text-sm text-text-secondary mt-1">
+                Analisi avanzata generata via n8n + LLM
+              </p>
             </div>
 
             <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-               <!-- Percentile -->
-               <div class="space-y-4">
-                  <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">Percentile Rank</div>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-black text-white italic">{{ performance()!.n8nEnrichment.percentileRank }}</span>
-                    <span class="text-xl font-bold text-text-secondary">%</span>
-                  </div>
-                  <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full bg-warning transition-all" [style.width.%]="performance()!.n8nEnrichment.percentileRank"></div>
-                  </div>
-                  <p class="text-[10px] text-text-secondary leading-tight italic">Top {{ 100 - performance()!.n8nEnrichment.percentileRank }}% dei partecipanti</p>
-               </div>
+              <!-- Percentile -->
+              <div class="space-y-4">
+                <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">
+                  Percentile Rank
+                </div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-5xl font-black text-white italic">{{
+                    performance()!.n8nEnrichment.percentileRank
+                  }}</span>
+                  <span class="text-xl font-bold text-text-secondary">%</span>
+                </div>
+                <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-warning transition-all"
+                    [style.width.%]="performance()!.n8nEnrichment.percentileRank"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-text-secondary leading-tight italic">
+                  Top {{ 100 - performance()!.n8nEnrichment.percentileRank }}% dei partecipanti
+                </p>
+              </div>
 
-               <!-- Confronto -->
-               <div class="space-y-4">
-                  <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">Confronto Eventi Simili</div>
-                  <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                       <mat-icon [class.text-success]="performance()!.n8nEnrichment.similarEventsComparison.delta >= 0"
-                                [class.text-red-400]="performance()!.n8nEnrichment.similarEventsComparison.delta < 0">
-                         {{ performance()!.n8nEnrichment.similarEventsComparison.delta >= 0 ? 'arrow_upward' : 'arrow_downward' }}
-                       </mat-icon>
+              <!-- Confronto -->
+              <div class="space-y-4">
+                <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">
+                  Confronto Eventi Simili
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                    <mat-icon
+                      [class.text-success]="
+                        performance()!.n8nEnrichment.similarEventsComparison.delta >= 0
+                      "
+                      [class.text-red-400]="
+                        performance()!.n8nEnrichment.similarEventsComparison.delta < 0
+                      "
+                    >
+                      {{
+                        performance()!.n8nEnrichment.similarEventsComparison.delta >= 0
+                          ? 'arrow_upward'
+                          : 'arrow_downward'
+                      }}
+                    </mat-icon>
+                  </div>
+                  <div>
+                    <div class="text-2xl font-black text-white italic">
+                      {{ performance()!.n8nEnrichment.similarEventsComparison.delta > 0 ? '+' : ''
+                      }}{{ performance()!.n8nEnrichment.similarEventsComparison.delta }}
                     </div>
-                    <div>
-                      <div class="text-2xl font-black text-white italic">
-                        {{ performance()!.n8nEnrichment.similarEventsComparison.delta > 0 ? '+' : '' }}{{ performance()!.n8nEnrichment.similarEventsComparison.delta }}
-                      </div>
-                      <div class="text-[10px] text-text-secondary uppercase">Diff. vs Media ({{ performance()!.n8nEnrichment.similarEventsComparison.avgScore }})</div>
+                    <div class="text-[10px] text-text-secondary uppercase">
+                      Diff. vs Media ({{
+                        performance()!.n8nEnrichment.similarEventsComparison.avgScore
+                      }})
                     </div>
                   </div>
-               </div>
+                </div>
+              </div>
 
-               <!-- Meteo -->
-               <div class="space-y-4">
-                  <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">Condizioni Meteo</div>
-                  <div class="flex items-center gap-4 bg-background/50 p-4 rounded-2xl border border-white/5">
-                    <mat-icon class="text-primary scale-125">wb_sunny</mat-icon>
-                    <div>
-                      <div class="text-lg font-black text-white">{{ performance()!.n8nEnrichment.weatherConditions?.temperature }}°C</div>
-                      <div class="text-[10px] text-text-secondary uppercase">{{ performance()!.n8nEnrichment.weatherConditions?.conditions }} · {{ performance()!.n8nEnrichment.weatherConditions?.humidity }}% umidità</div>
+              <!-- Meteo -->
+              <div class="space-y-4">
+                <div class="text-xs font-bold text-text-secondary uppercase tracking-widest">
+                  Condizioni Meteo
+                </div>
+                <div
+                  class="flex items-center gap-4 bg-background/50 p-4 rounded-2xl border border-white/5"
+                >
+                  <mat-icon class="text-primary scale-125">wb_sunny</mat-icon>
+                  <div>
+                    <div class="text-lg font-black text-white">
+                      {{ performance()!.n8nEnrichment.weatherConditions?.temperature }}°C
+                    </div>
+                    <div class="text-[10px] text-text-secondary uppercase">
+                      {{ performance()!.n8nEnrichment.weatherConditions?.conditions }} ·
+                      {{ performance()!.n8nEnrichment.weatherConditions?.humidity }}% umidità
                     </div>
                   </div>
-               </div>
+                </div>
+              </div>
             </div>
 
             <!-- LLM Insights columns -->
             <div class="px-8 pb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-               <div class="bg-success/5 border border-success/20 rounded-2xl p-6">
-                 <h4 class="text-sm font-black text-success uppercase tracking-widest mb-4 flex items-center">
-                   <mat-icon class="mr-2 text-sm">trending_up</mat-icon> Punti di Forza
-                 </h4>
-                 <ul class="space-y-3">
-                   @for (strength of performance()!.n8nEnrichment.llmInsights.strengthPoints; track strength) {
-                     <li class="group flex items-start gap-3">
-                        <mat-icon class="text-success scale-75 mt-0.5 shrink-0">check_circle_outline</mat-icon>
-                        <span class="text-xs text-white/80 leading-relaxed">{{ strength }}</span>
-                     </li>
-                   }
-                 </ul>
-               </div>
-               <div class="bg-accent/5 border border-accent/20 rounded-2xl p-6">
-                 <h4 class="text-sm font-black text-accent uppercase tracking-widest mb-4 flex items-center">
-                   <mat-icon class="mr-2 text-sm">report_problem</mat-icon> Aree di Miglioramento
-                 </h4>
-                 <ul class="space-y-3">
-                   @for (area of performance()!.n8nEnrichment.llmInsights.improvementAreas; track area) {
-                     <li class="group flex items-start gap-3">
-                        <mat-icon class="text-accent scale-75 mt-0.5 shrink-0">info_outline</mat-icon>
-                        <span class="text-xs text-white/80 leading-relaxed">{{ area }}</span>
-                     </li>
-                   }
-                 </ul>
-               </div>
+              <div class="bg-success/5 border border-success/20 rounded-2xl p-6">
+                <h4
+                  class="text-sm font-black text-success uppercase tracking-widest mb-4 flex items-center"
+                >
+                  <mat-icon class="mr-2 text-sm">trending_up</mat-icon> Punti di Forza
+                </h4>
+                <ul class="space-y-3">
+                  @for (
+                    strength of performance()!.n8nEnrichment.llmInsights.strengthPoints;
+                    track strength
+                  ) {
+                    <li class="group flex items-start gap-3">
+                      <mat-icon class="text-success scale-75 mt-0.5 shrink-0"
+                        >check_circle_outline</mat-icon
+                      >
+                      <span class="text-xs text-white/80 leading-relaxed">{{ strength }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+              <div class="bg-accent/5 border border-accent/20 rounded-2xl p-6">
+                <h4
+                  class="text-sm font-black text-accent uppercase tracking-widest mb-4 flex items-center"
+                >
+                  <mat-icon class="mr-2 text-sm">report_problem</mat-icon> Aree di Miglioramento
+                </h4>
+                <ul class="space-y-3">
+                  @for (
+                    area of performance()!.n8nEnrichment.llmInsights.improvementAreas;
+                    track area
+                  ) {
+                    <li class="group flex items-start gap-3">
+                      <mat-icon class="text-accent scale-75 mt-0.5 shrink-0">info_outline</mat-icon>
+                      <span class="text-xs text-white/80 leading-relaxed">{{ area }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
             </div>
 
             <!-- Motivational Message -->
-            <div class="mx-8 mb-8 p-6 bg-primary/10 border border-primary/20 rounded-2xl text-center">
-               <p class="text-primary font-black italic tracking-wide">"{{ performance()!.n8nEnrichment.llmInsights.motivationalMessage }}"</p>
+            <div
+              class="mx-8 mb-8 p-6 bg-primary/10 border border-primary/20 rounded-2xl text-center"
+            >
+              <p class="text-primary font-black italic tracking-wide">
+                "{{ performance()!.n8nEnrichment.llmInsights.motivationalMessage }}"
+              </p>
             </div>
           </div>
 
@@ -413,7 +490,13 @@ export class PerformanceDetailComponent implements OnInit {
           if (this.isDataVisible()) {
             this.setupTimelines(perf);
             this.loadGroupAverage(perf.eventId, perf);
-            // aiAnalysis is already part of EnrichedPerformance in this mock
+
+            // Map the enriched data to the aiAnalysis signal expected by the template
+            this.aiAnalysis.set({
+              analysis: perf.aiAnalysis,
+              trainingPlan: perf.trainingPlan,
+              suggestions: perf.suggestions,
+            });
           }
           this.isLoading.set(false);
         },
@@ -450,27 +533,27 @@ export class PerformanceDetailComponent implements OnInit {
 
   setupTimelines(perf: EnrichedPerformance) {
     this.heartRateChartData = {
-      labels: perf.wearableData.heartRateTimeline.map(t => `${t.minute}m`),
+      labels: perf.wearableData.heartRateTimeline.map((t) => `${t.minute}m`),
       datasets: [
         {
-          data: perf.wearableData.heartRateTimeline.map(t => t.bpm),
+          data: perf.wearableData.heartRateTimeline.map((t) => t.bpm),
           borderColor: '#00D4FF',
           backgroundColor: 'rgba(0,212,255,0.1)',
           fill: true,
-          label: 'Frequenza Cardiaca (bpm)'
+          label: 'Frequenza Cardiaca (bpm)',
         },
       ],
     };
 
     this.caloriesChartData = {
-      labels: perf.wearableData.caloriesTimeline.map(t => `${t.minute}m`),
+      labels: perf.wearableData.caloriesTimeline.map((t) => `${t.minute}m`),
       datasets: [
         {
-          data: perf.wearableData.caloriesTimeline.map(t => t.kcal),
+          data: perf.wearableData.caloriesTimeline.map((t) => t.kcal),
           borderColor: '#FF6B35',
           backgroundColor: 'rgba(255,107,53,0.1)',
           fill: true,
-          label: 'Calorie (kcal)'
+          label: 'Calorie (kcal)',
         },
       ],
     };

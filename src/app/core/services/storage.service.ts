@@ -9,10 +9,9 @@ export const STORAGE_KEYS = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-  
   getItem<T>(key: string): T | null {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;

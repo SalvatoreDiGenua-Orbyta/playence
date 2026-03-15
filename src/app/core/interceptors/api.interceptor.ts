@@ -8,7 +8,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (token) {
     const parsedToken = token.startsWith('"') ? JSON.parse(token) : token;
     const clonedReq = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${parsedToken}`)
+      headers: req.headers.set('Authorization', `Bearer ${parsedToken}`),
     });
     return next(clonedReq);
   }

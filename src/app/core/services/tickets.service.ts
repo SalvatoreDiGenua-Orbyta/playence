@@ -10,7 +10,7 @@ export interface TicketPurchaseResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketsService {
   private http = inject(HttpClient);

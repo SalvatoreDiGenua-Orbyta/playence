@@ -37,10 +37,12 @@ import { DatePipe } from '@angular/common';
       >
         {{ data.code }}
       </div>
-      
-      <div class="bg-white p-3 rounded-2xl inline-block mb-6 shadow-inner border border-white/10 group">
-        <img 
-          [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + data.code" 
+
+      <div
+        class="bg-white p-3 rounded-2xl inline-block mb-6 shadow-inner border border-white/10 group"
+      >
+        <img
+          [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + data.code"
           alt="QR Code Prenotazione"
           class="w-32 h-32 block rounded-lg group-hover:scale-105 transition-transform"
         />
@@ -73,7 +75,7 @@ export class TicketSuccessDialogComponent {
     MatIconModule,
     MatSlideToggleModule,
     MatDialogModule,
-    DatePipe
+    DatePipe,
   ],
   template: `
     @if (isLoading()) {
@@ -367,10 +369,10 @@ export class TicketPurchaseComponent implements OnInit {
 
   totalTickets = toSignal(
     this.extraParticipants.valueChanges.pipe(
-      map(values => 1 + values.length),
-      startWith(1 + this.extraParticipants.length)
+      map((values) => 1 + values.length),
+      startWith(1 + this.extraParticipants.length),
     ),
-    { initialValue: 1 + this.extraParticipants.length }
+    { initialValue: 1 + this.extraParticipants.length },
   );
 
   subtotal = computed(() => {
