@@ -33,10 +33,19 @@ import { DatePipe } from '@angular/common';
       <h2 class="text-2xl font-black text-white mb-2">Prenotazione Confermata!</h2>
       <p class="text-text-secondary mb-4 text-sm">Il tuo codice prenotazione è:</p>
       <div
-        class="bg-background py-3 px-4 rounded-xl border border-white/5 font-mono text-2xl text-primary font-bold tracking-widest mb-6"
+        class="bg-background py-3 px-4 rounded-xl border border-white/5 font-mono text-2xl text-primary font-bold tracking-widest mb-4"
       >
         {{ data.code }}
       </div>
+      
+      <div class="bg-white p-3 rounded-2xl inline-block mb-6 shadow-inner border border-white/10 group">
+        <img 
+          [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + data.code" 
+          alt="QR Code Prenotazione"
+          class="w-32 h-32 block rounded-lg group-hover:scale-105 transition-transform"
+        />
+      </div>
+
       <button
         mat-flat-button
         color="primary"

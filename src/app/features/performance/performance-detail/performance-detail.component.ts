@@ -402,17 +402,17 @@ export class PerformanceDetailComponent implements OnInit {
   public comparisonChartData!: ChartData<'bar'>;
 
   ngOnInit() {
-    const eventId = this.route.snapshot.paramMap.get('eventId');
+    const performanceId = this.route.snapshot.paramMap.get('performanceId');
     const user = this.authService.currentUser();
 
-    if (eventId && user) {
-      this.perfService.getCachedOrFetch(eventId).subscribe({
+    if (performanceId && user) {
+      this.perfService.getCachedOrFetch(performanceId).subscribe({
         next: (perf) => {
           this.performance.set(perf);
           this.checkVisibility(perf.date, user.createdAt);
           if (this.isDataVisible()) {
             this.setupTimelines(perf);
-            this.loadGroupAverage(eventId, perf);
+            this.loadGroupAverage(perf.eventId, perf);
             // aiAnalysis is already part of EnrichedPerformance in this mock
           }
           this.isLoading.set(false);
