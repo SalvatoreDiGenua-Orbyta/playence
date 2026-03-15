@@ -202,6 +202,41 @@ export function makeServer() {
           coachComment: 'Buon ritmo nella prima metà ma calo vistoso alla fine. Attenzione a bilanciare lo sforzo.',
           aiAnalysis: 'Dispendio energetico elevato con picchi in fascia anaerobica ripetuti. Suggerito un lavoro specifico per migliorare la tolleranza all\'acido lattico.'
         } as any);
+
+        // Evento 3: DEMO PRESENTAZIONE (Wearable configurato)
+        const demoEvent = server.create('event', {
+          title: 'CrossFit Games Prep: Intensità Pro',
+          sport: 'CrossFit',
+          cost: 45,
+          date: new Date().toISOString(),
+          duration: 120,
+          location: 'CrossFit Milan, Italia',
+          experience: 'Agonistico',
+          hasVip: false,
+          maxParticipants: 12,
+          currentParticipants: 10,
+          description: 'Sessione ad altissima intensità focalizzata sulla preparazione ai Games. Monitoraggio biometria in tempo reale.',
+          coverImage: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800',
+          status: 'published',
+          wearableEnabled: true,
+          pollingIntervalSeconds: 5,
+          metricsToCollect: ['heartRate', 'calories', 'performanceScore', 'oxygenSaturation'],
+          participantIds: [testUser.id]
+        } as any);
+
+        server.create('performance', {
+          userId: testUser.id,
+          eventId: demoEvent.id,
+          date: new Date().toISOString(),
+          performanceScore: 94,
+          heartRateAvg: 165,
+          heartRateMax: 192,
+          caloriesBurned: 1100,
+          distanceKm: 0,
+          durationMinutes: 60,
+          coachComment: 'Performance eccezionale. Hai mantenuto un\'intensità altissima per tutta la durata del WOD.',
+          aiAnalysis: 'Dati indicanti una condizione atletica di picco. Il recupero tra gli intervalli è migliorato del 15% rispetto all\'ultima sessione CrossFit registrata.'
+        } as any);
       }
     },
 
