@@ -112,7 +112,7 @@ import { EventsService } from '../../../core/services/events.service';
                     color="accent"
                     [routerLink]="[
                       '/profile/history',
-                      item.event?.id || item.performance.eventId,
+                      item.performance.id,
                       'performance',
                     ]"
                     class="!border-white/20 text-white hover:!bg-accent hover:!border-accent transition-colors !rounded-xl"

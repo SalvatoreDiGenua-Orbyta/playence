@@ -31,7 +31,7 @@ export const routes: Routes = [
     children: [
       { path: '', loadComponent: () => import('./features/profile/user-profile/user-profile.component').then(m => m.UserProfileComponent) },
       { path: 'history', loadComponent: () => import('./features/profile/event-history/event-history.component').then(m => m.EventHistoryComponent) },
-      { path: 'history/:eventId/performance', loadComponent: () => import('./features/performance/performance-detail/performance-detail.component').then(m => m.PerformanceDetailComponent) },
+      { path: 'history/:performanceId/performance', loadComponent: () => import('./features/performance/performance-detail/performance-detail.component').then(m => m.PerformanceDetailComponent) },
     ]
   },
   { path: '**', redirectTo: 'events' }
