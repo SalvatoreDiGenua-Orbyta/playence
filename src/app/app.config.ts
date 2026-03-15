@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([apiInterceptor])),
     provideAnimationsAsync(),
-    provideCharts(withDefaultRegisterables())
-  ]
+    provideCharts(withDefaultRegisterables()),
+  ],
 };

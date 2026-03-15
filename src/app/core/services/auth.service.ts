@@ -7,28 +7,30 @@ import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private http = inject(HttpClient);
   private storage = inject(StorageService);
   private router = inject(Router);
 
-  private currentUserSubject = new BehaviorSubject<User | null>(this.storage.getItem<User>(STORAGE_KEYS.CURRENT_USER));
+  private currentUserSubject = new BehaviorSubject<User | null>(
+    this.storage.getItem<User>(STORAGE_KEYS.CURRENT_USER),
+  );
   public currentUser$ = this.currentUserSubject.asObservable();
 
   public currentUser = signal<User | null>(this.storage.getItem<User>(STORAGE_KEYS.CURRENT_USER));
 
   login(credentials: any): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, credentials).pipe(
-      tap(response => this.setAuthData(response))
-    );
+    return this.http
+      .post<AuthResponse>(`${environment.apiUrl}/auth/login`, credentials)
+      .pipe(tap((response) => this.setAuthData(response)));
   }
 
   register(userData: any): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/register`, userData).pipe(
-      tap(response => this.setAuthData(response))
-    );
+    return this.http
+      .post<AuthResponse>(`${environment.apiUrl}/auth/register`, userData)
+      .pipe(tap((response) => this.setAuthData(response)));
   }
 
   logout(): void {
@@ -50,10 +52,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    // Note: Since items are strictly parsed with JSON.parse in StorageService, 
+    // Note: Since items are strictly parsed with JSON.parse in StorageService,
     // we need to make sure tokens are set as JSON strings or we handle it specially.
-    // Actually in StorageService, item ? JSON.parse(item) : null; 
-    // If token is just a base64 string, JSON.parse will fail. 
+    // Actually in StorageService, item ? JSON.parse(item) : null;
+    // If token is just a base64 string, JSON.parse will fail.
     // We should just use localStorage directly for the string token.
     return localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
   }

@@ -47,19 +47,35 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   eventForm: FormGroup;
   isEditMode = signal(false);
   isPolling = signal(false);
-  
+
   availableMetrics: WearableMetric[] = [
-    'heartRate', 'calories', 'distance', 'oxygenSaturation', 'steps', 'temperature', 'performanceScore'
+    'heartRate',
+    'calories',
+    'distance',
+    'oxygenSaturation',
+    'steps',
+    'temperature',
+    'performanceScore',
   ];
 
-  sports = ['Calcio', 'Tennis', 'Nuoto', 'Ciclismo', 'Pallacanestro', 'Padel', 'Running', 'Yoga', 'CrossFit'];
+  sports = [
+    'Calcio',
+    'Tennis',
+    'Nuoto',
+    'Ciclismo',
+    'Pallacanestro',
+    'Padel',
+    'Running',
+    'Yoga',
+    'CrossFit',
+  ];
   experiences = ['Principiante', 'Intermedio', 'Avanzato', 'Agonistico'];
 
   // Mock devices for discovery
   detectedDevices = signal([
     { id: 'dev_1', name: 'Garmin Fenix 7', status: 'connected', type: 'garmin' },
     { id: 'dev_2', name: 'Apple Watch Series 9', status: 'pairing', type: 'apple_watch' },
-    { id: 'dev_3', name: 'Polar H10', status: 'waiting', type: 'polar' }
+    { id: 'dev_3', name: 'Polar H10', status: 'waiting', type: 'polar' },
   ]);
 
   constructor() {
@@ -130,7 +146,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   }
 
   togglePolling() {
-    this.isPolling.update(v => !v);
+    this.isPolling.update((v) => !v);
     if (this.isPolling()) {
       const eventId = this.route.snapshot.paramMap.get('id') || 'temp_event';
       const interval = this.eventForm.get('pollingIntervalSeconds')?.value;

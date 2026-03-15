@@ -30,7 +30,7 @@ export interface SportEvent {
   status: 'draft' | 'published' | 'cancelled' | 'completed';
   // Nuovi campi per il monitoraggio wearable:
   wearableEnabled: boolean;
-  pollingIntervalSeconds: number;     // 5 | 10 | 30
+  pollingIntervalSeconds: number; // 5 | 10 | 30
   metricsToCollect: WearableMetric[];
   participantIds: string[];
 }

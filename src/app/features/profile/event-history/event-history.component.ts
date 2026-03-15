@@ -110,11 +110,7 @@ import { EventsService } from '../../../core/services/events.service';
                   <a
                     mat-stroked-button
                     color="accent"
-                    [routerLink]="[
-                      '/profile/history',
-                      item.performance.id,
-                      'performance',
-                    ]"
+                    [routerLink]="['/profile/history', item.performance.id, 'performance']"
                     class="!border-white/20 text-white hover:!bg-accent hover:!border-accent transition-colors !rounded-xl"
                   >
                     <mat-icon class="mr-2">insights</mat-icon> Analisi Performance

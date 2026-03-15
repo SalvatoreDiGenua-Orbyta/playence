@@ -259,8 +259,7 @@ import { PerformanceAverage } from '../../../core/models/performance.model';
           <div class="max-w-2xl mx-auto flex items-center justify-between">
             <div class="flex flex-col">
               <span class="text-text-secondary text-sm"
-                >Posti rimanenti:
-                {{ avaliableSpots() }}</span
+                >Posti rimanenti: {{ avaliableSpots() }}</span
               >
               <span class="text-3xl font-black text-white">€{{ event()!.cost }}</span>
             </div>

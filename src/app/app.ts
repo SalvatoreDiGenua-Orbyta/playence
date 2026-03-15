@@ -13,4 +13,4 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     </main>
   `,
 })
-export class App { }
+export class App {}

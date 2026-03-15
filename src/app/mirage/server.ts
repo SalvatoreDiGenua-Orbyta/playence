@@ -18,37 +18,76 @@ export function makeServer() {
         name: () => faker.person.fullName(),
         email: () => faker.internet.email(),
         phone: () => faker.phone.number(),
-        preferredSports: () => faker.helpers.arrayElements(
-          ['Calcio', 'Tennis', 'Nuoto', 'Ciclismo', 'Pallacanestro', 'Padel', 'Running', 'Yoga', 'CrossFit'],
-          faker.number.int({ min: 1, max: 3 })
-        ),
+        preferredSports: () =>
+          faker.helpers.arrayElements(
+            [
+              'Calcio',
+              'Tennis',
+              'Nuoto',
+              'Ciclismo',
+              'Pallacanestro',
+              'Padel',
+              'Running',
+              'Yoga',
+              'CrossFit',
+            ],
+            faker.number.int({ min: 1, max: 3 }),
+          ),
         createdAt: () => faker.date.past({ years: 1 }).toISOString(),
       }),
 
       coach: Factory.extend({
         name: () => faker.person.fullName(),
-        sport: () => faker.helpers.arrayElement(['Calcio', 'Tennis', 'Nuoto', 'Ciclismo', 'Pallacanestro', 'Padel', 'Running', 'Yoga', 'CrossFit']),
+        sport: () =>
+          faker.helpers.arrayElement([
+            'Calcio',
+            'Tennis',
+            'Nuoto',
+            'Ciclismo',
+            'Pallacanestro',
+            'Padel',
+            'Running',
+            'Yoga',
+            'CrossFit',
+          ]),
         bio: () => faker.lorem.paragraph(),
         isVip: () => faker.datatype.boolean(),
-        image: () => `https://randomuser.me/api/portraits/${faker.helpers.arrayElement(['men', 'women'])}/${faker.number.int({ min: 1, max: 99 })}.jpg`,
+        image: () =>
+          `https://randomuser.me/api/portraits/${faker.helpers.arrayElement(['men', 'women'])}/${faker.number.int({ min: 1, max: 99 })}.jpg`,
         rating: () => faker.number.float({ min: 3.5, max: 5, fractionDigits: 1 }),
       }),
 
       event: Factory.extend({
         title: () => faker.lorem.words(3),
-        sport: () => faker.helpers.arrayElement(['Calcio', 'Tennis', 'Nuoto', 'Ciclismo', 'Pallacanestro', 'Padel', 'Running', 'Yoga', 'CrossFit']),
+        sport: () =>
+          faker.helpers.arrayElement([
+            'Calcio',
+            'Tennis',
+            'Nuoto',
+            'Ciclismo',
+            'Pallacanestro',
+            'Padel',
+            'Running',
+            'Yoga',
+            'CrossFit',
+          ]),
         cost: () => faker.number.int({ min: 20, max: 500 }),
         date: () => faker.date.future({ years: 1 }).toISOString(),
         duration: () => faker.helpers.arrayElement([60, 90, 120, 180, 240]),
         location: () => `${faker.location.city()}, ${faker.location.country()}`,
-        experience: () => faker.helpers.arrayElement(['Principiante', 'Intermedio', 'Avanzato', 'Agonistico']),
+        experience: () =>
+          faker.helpers.arrayElement(['Principiante', 'Intermedio', 'Avanzato', 'Agonistico']),
         hasVip: () => faker.datatype.boolean(),
         maxParticipants: () => faker.number.int({ min: 10, max: 100 }),
         currentParticipants: () => faker.number.int({ min: 0, max: 50 }),
         description: () => faker.lorem.paragraphs(2),
         image: () => `https://picsum.photos/seed/${faker.string.alphanumeric(6)}/800/600`,
         coverImage: () => `https://picsum.photos/seed/${faker.string.alphanumeric(6)}/1200/800`,
-        tags: () => faker.helpers.arrayElements(['outdoor', 'indoor', 'team', 'solo', 'competitivo', 'ricreativo'], 2),
+        tags: () =>
+          faker.helpers.arrayElements(
+            ['outdoor', 'indoor', 'team', 'solo', 'competitivo', 'ricreativo'],
+            2,
+          ),
       }),
 
       performance: Factory.extend({
@@ -71,7 +110,8 @@ export function makeServer() {
         sport: 'Calcio',
         bio: 'Leggenda del calcio mondiale, esperto in punizioni e tecnica individuale.',
         isVip: true,
-        image: 'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
+        image:
+          'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
         rating: 5.0,
       } as any);
 
@@ -80,7 +120,8 @@ export function makeServer() {
         sport: 'Tennis',
         bio: 'Uno dei coach più famosi al mondo, ha allenato campioni del calibro di Serena Williams.',
         isVip: true,
-        image: 'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
+        image:
+          'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
         rating: 4.9,
       } as any);
 
@@ -105,8 +146,10 @@ export function makeServer() {
         hasVip: true,
         maxParticipants: 15,
         currentParticipants: 8,
-        description: 'Una sessione esclusiva per imparare l\'arte del calcio di punizione con "Pinturicchio".',
-        coverImage: 'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
+        description:
+          'Una sessione esclusiva per imparare l\'arte del calcio di punizione con "Pinturicchio".',
+        coverImage:
+          'https://editorial.uefa.com/resources/01d3-0e7068fcad64-037b1b1412ff-1000/format/wide1/alessandro_del_piero_juventus_.jpeg?imwidth=2048',
         coach: delPiero,
       });
 
@@ -121,8 +164,10 @@ export function makeServer() {
         hasVip: true,
         maxParticipants: 10,
         currentParticipants: 4,
-        description: 'Analisi biomeccanica e perfezionamento del rovescio con il coach dei campioni.',
-        coverImage: 'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
+        description:
+          'Analisi biomeccanica e perfezionamento del rovescio con il coach dei campioni.',
+        coverImage:
+          'https://www.tennisworlditalia.com/imgb/69146/patrick-mouratoglou-spiega-come-colpire-il-rovescio-di-stefanos-tsitsipas.webp',
         coach: mouratoglou,
       });
 
@@ -137,14 +182,16 @@ export function makeServer() {
         hasVip: true,
         maxParticipants: 20,
         currentParticipants: 12,
-        description: 'Sessione di shooting e consigli tecnici dal primo italiano a vincere un anello NBA.',
-        coverImage: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Sessione di shooting e consigli tecnici dal primo italiano a vincere un anello NBA.',
+        coverImage:
+          'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800',
         coach: belinelli,
       });
 
       const coaches = server.createList('coach', 7);
 
-      coaches.forEach(coach => {
+      coaches.forEach((coach) => {
         server.createList('event', faker.number.int({ min: 1, max: 3 }), { coach });
       });
 
@@ -164,7 +211,7 @@ export function makeServer() {
           userId: testUser.id,
           eventId: allEvents[0].id,
           participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@playence.it' },
-          status: 'confirmed'
+          status: 'confirmed',
         } as any);
 
         server.create('performance', {
@@ -178,7 +225,8 @@ export function makeServer() {
           distanceKm: 8.5,
           durationMinutes: 60,
           coachComment: 'Ottima sessione, progressione costante e buon recupero finale.',
-          aiAnalysis: 'Il battito medio di 145 bpm indica un ottimo allenamento in soglia aerobica. Mantieni questo passo e aumenta i tempi di defaticamento del 10% per un recupero ottimale.'
+          aiAnalysis:
+            'Il battito medio di 145 bpm indica un ottimo allenamento in soglia aerobica. Mantieni questo passo e aumenta i tempi di defaticamento del 10% per un recupero ottimale.',
         } as any);
 
         // Evento 2: Vecchio di 8 mesi (dati bloccati in UI come simulazione storico account gratuito/premium)
@@ -186,7 +234,7 @@ export function makeServer() {
           userId: testUser.id,
           eventId: allEvents[1].id,
           participant: { firstName: 'Mario', lastName: 'Rossi', email: 'test@playence.it' },
-          status: 'confirmed'
+          status: 'confirmed',
         } as any);
 
         server.create('performance', {
@@ -199,8 +247,10 @@ export function makeServer() {
           caloriesBurned: 800,
           distanceKm: 12.0,
           durationMinutes: 90,
-          coachComment: 'Buon ritmo nella prima metà ma calo vistoso alla fine. Attenzione a bilanciare lo sforzo.',
-          aiAnalysis: 'Dispendio energetico elevato con picchi in fascia anaerobica ripetuti. Suggerito un lavoro specifico per migliorare la tolleranza all\'acido lattico.'
+          coachComment:
+            'Buon ritmo nella prima metà ma calo vistoso alla fine. Attenzione a bilanciare lo sforzo.',
+          aiAnalysis:
+            "Dispendio energetico elevato con picchi in fascia anaerobica ripetuti. Suggerito un lavoro specifico per migliorare la tolleranza all'acido lattico.",
         } as any);
 
         // Evento 3: DEMO PRESENTAZIONE (Wearable configurato)
@@ -215,13 +265,15 @@ export function makeServer() {
           hasVip: false,
           maxParticipants: 12,
           currentParticipants: 10,
-          description: 'Sessione ad altissima intensità focalizzata sulla preparazione ai Games. Monitoraggio biometria in tempo reale.',
-          coverImage: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800',
+          description:
+            'Sessione ad altissima intensità focalizzata sulla preparazione ai Games. Monitoraggio biometria in tempo reale.',
+          coverImage:
+            'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800',
           status: 'published',
           wearableEnabled: true,
           pollingIntervalSeconds: 5,
           metricsToCollect: ['heartRate', 'calories', 'performanceScore', 'oxygenSaturation'],
-          participantIds: [testUser.id]
+          participantIds: [testUser.id],
         } as any);
 
         server.create('performance', {
@@ -234,8 +286,10 @@ export function makeServer() {
           caloriesBurned: 1100,
           distanceKm: 0,
           durationMinutes: 60,
-          coachComment: 'Performance eccezionale. Hai mantenuto un\'intensità altissima per tutta la durata del WOD.',
-          aiAnalysis: 'Dati indicanti una condizione atletica di picco. Il recupero tra gli intervalli è migliorato del 15% rispetto all\'ultima sessione CrossFit registrata.'
+          coachComment:
+            "Performance eccezionale. Hai mantenuto un'intensità altissima per tutta la durata del WOD.",
+          aiAnalysis:
+            "Dati indicanti una condizione atletica di picco. Il recupero tra gli intervalli è migliorato del 15% rispetto all'ultima sessione CrossFit registrata.",
         } as any);
       }
     },
@@ -260,17 +314,23 @@ export function makeServer() {
       });
 
       this.get('/events', (schema: any, request) => {
-        const { sport, minCost, maxCost, experience, location, hasVip, dateFrom, dateTo } = request.queryParams;
+        const { sport, minCost, maxCost, experience, location, hasVip, dateFrom, dateTo } =
+          request.queryParams;
         let events = schema.all('event').models;
 
         if (sport) events = events.filter((e: any) => e.sport === sport);
         if (minCost) events = events.filter((e: any) => e.cost >= Number(minCost));
         if (maxCost) events = events.filter((e: any) => e.cost <= Number(maxCost));
         if (experience) events = events.filter((e: any) => e.experience === experience);
-        if (location) events = events.filter((e: any) => e.location.toLowerCase().includes(String(location).toLowerCase()));
+        if (location)
+          events = events.filter((e: any) =>
+            e.location.toLowerCase().includes(String(location).toLowerCase()),
+          );
         if (hasVip === 'true') events = events.filter((e: any) => e.hasVip);
-        if (dateFrom) events = events.filter((e: any) => new Date(e.date) >= new Date(String(dateFrom)));
-        if (dateTo) events = events.filter((e: any) => new Date(e.date) <= new Date(String(dateTo)));
+        if (dateFrom)
+          events = events.filter((e: any) => new Date(e.date) >= new Date(String(dateFrom)));
+        if (dateTo)
+          events = events.filter((e: any) => new Date(e.date) <= new Date(String(dateTo)));
 
         events = events.map((e: any) => {
           const eventAttrs = { ...e.attrs };
@@ -303,7 +363,10 @@ export function makeServer() {
             status: 'confirmed',
           });
         });
-        return { tickets, confirmationCode: `SC-${Math.random().toString(36).substr(2, 9).toUpperCase()}` };
+        return {
+          tickets,
+          confirmationCode: `SC-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+        };
       });
 
       this.get('/users/:id/tickets', (schema: any, request) => {
@@ -319,10 +382,18 @@ export function makeServer() {
         if (!perfs.length) return { average: null };
 
         const avg = {
-          heartRateAvg: Math.round(perfs.reduce((s: any, p: any) => s + p.heartRateAvg, 0) / perfs.length),
-          caloriesBurned: Math.round(perfs.reduce((s: any, p: any) => s + p.caloriesBurned, 0) / perfs.length),
-          distanceKm: +(perfs.reduce((s: any, p: any) => s + p.distanceKm, 0) / perfs.length).toFixed(1),
-          performanceScore: Math.round(perfs.reduce((s: any, p: any) => s + p.performanceScore, 0) / perfs.length),
+          heartRateAvg: Math.round(
+            perfs.reduce((s: any, p: any) => s + p.heartRateAvg, 0) / perfs.length,
+          ),
+          caloriesBurned: Math.round(
+            perfs.reduce((s: any, p: any) => s + p.caloriesBurned, 0) / perfs.length,
+          ),
+          distanceKm: +(
+            perfs.reduce((s: any, p: any) => s + p.distanceKm, 0) / perfs.length
+          ).toFixed(1),
+          performanceScore: Math.round(
+            perfs.reduce((s: any, p: any) => s + p.performanceScore, 0) / perfs.length,
+          ),
         };
         return { average: avg, participantsCount: perfs.length };
       });
@@ -332,13 +403,29 @@ export function makeServer() {
         return {
           analysis: `Analisi AI: La tua sessione ha mostrato un'ottima resistenza cardiovascolare con un FC media di ${performanceData?.heartRateAvg} bpm. Il tuo score di ${performanceData?.performanceScore}/100 indica margini di miglioramento nella fase finale dell'allenamento.`,
           trainingPlan: [
-            { week: 1, focus: 'Resistenza base', sessions: ['30 min corsa leggera', 'Stretching 20 min', 'Yoga 45 min'] },
-            { week: 2, focus: 'Forza funzionale', sessions: ['HIIT 25 min', 'Pesi corpo 30 min', 'Recovery 20 min'] },
-            { week: 3, focus: 'Intensità progressiva', sessions: ['Interval training 35 min', 'Core 20 min', 'Nuoto 30 min'] },
-            { week: 4, focus: 'Picco performance', sessions: ['Test performance 45 min', 'Defaticamento 30 min', 'Analisi progressi'] },
+            {
+              week: 1,
+              focus: 'Resistenza base',
+              sessions: ['30 min corsa leggera', 'Stretching 20 min', 'Yoga 45 min'],
+            },
+            {
+              week: 2,
+              focus: 'Forza funzionale',
+              sessions: ['HIIT 25 min', 'Pesi corpo 30 min', 'Recovery 20 min'],
+            },
+            {
+              week: 3,
+              focus: 'Intensità progressiva',
+              sessions: ['Interval training 35 min', 'Core 20 min', 'Nuoto 30 min'],
+            },
+            {
+              week: 4,
+              focus: 'Picco performance',
+              sessions: ['Test performance 45 min', 'Defaticamento 30 min', 'Analisi progressi'],
+            },
           ],
           suggestions: [
-            'Aumenta l\'idratazione durante le sessioni ad alta intensità',
+            "Aumenta l'idratazione durante le sessioni ad alta intensità",
             'Incorpora 10 minuti di respirazione diaframmatica dopo ogni allenamento',
             'Considera di aggiungere un giorno di recupero attivo con attività a bassa intensità',
           ],
@@ -346,7 +433,9 @@ export function makeServer() {
       });
 
       this.get('/coaches', (schema: any) => schema.all('coach'));
-      this.get('/coaches/:id', (schema: any, request) => schema.find('coach', request.params['id']));
+      this.get('/coaches/:id', (schema: any, request) =>
+        schema.find('coach', request.params['id']),
+      );
 
       // Wearable routes
       this.post('/wearable/sessions', (schema: any, request) => {
@@ -369,21 +458,42 @@ export function makeServer() {
       this.post('/wearable/readings', (schema: any, request) => {
         const { sessionId, readings } = JSON.parse(request.requestBody);
         const saved = readings.map((r: any) =>
-          schema.create('wearableReading', { ...r, sessionId, timestamp: new Date().toISOString() })
+          schema.create('wearableReading', {
+            ...r,
+            sessionId,
+            timestamp: new Date().toISOString(),
+          }),
         );
         return { saved: saved.length };
       });
 
       this.get('/wearable/sessions/:id/aggregate', (schema: any, request) => {
-        const readings = schema.where('wearableReading', { sessionId: request.params['id'] }).models;
-        if (!readings.length) return { participantsCount: 0, heartRateAvg: 0, caloriesTotal: 0, distanceTotal: 0, durationMinutes: 0 };
+        const readings = schema.where('wearableReading', {
+          sessionId: request.params['id'],
+        }).models;
+        if (!readings.length)
+          return {
+            participantsCount: 0,
+            heartRateAvg: 0,
+            caloriesTotal: 0,
+            distanceTotal: 0,
+            durationMinutes: 0,
+          };
 
         const firstReading = readings[0];
         const participantsCount = [...new Set(readings.map((r: any) => r.participantId))].length;
-        const heartRateAvg = Math.round(readings.reduce((s: number, r: any) => s + (r.heartRate || 0), 0) / readings.length);
-        const caloriesTotal = Math.round(readings.reduce((s: number, r: any) => s + (r.calories || 0), 0));
-        const distanceTotal = +(readings.reduce((s: number, r: any) => s + (r.distanceKm || 0), 0)).toFixed(2);
-        const durationMinutes = Math.round((Date.now() - new Date(firstReading.timestamp).getTime()) / 60000);
+        const heartRateAvg = Math.round(
+          readings.reduce((s: number, r: any) => s + (r.heartRate || 0), 0) / readings.length,
+        );
+        const caloriesTotal = Math.round(
+          readings.reduce((s: number, r: any) => s + (r.calories || 0), 0),
+        );
+        const distanceTotal = +readings
+          .reduce((s: number, r: any) => s + (r.distanceKm || 0), 0)
+          .toFixed(2);
+        const durationMinutes = Math.round(
+          (Date.now() - new Date(firstReading.timestamp).getTime()) / 60000,
+        );
 
         return {
           participantsCount,
@@ -442,15 +552,32 @@ export function makeServer() {
                 'Calo di rendimento nelle ultime 2 sessioni registrate',
                 'Distanza percorsa inferiore alla media degli eventi simili',
               ],
-              motivationalMessage: 'Ottima sessione! Sei nel top 30% dei partecipanti a eventi di questo tipo.',
+              motivationalMessage:
+                'Ottima sessione! Sei nel top 30% dei partecipanti a eventi di questo tipo.',
             },
           },
           aiAnalysis: `Analisi AI: score ${performance.performanceScore}/100. Resistenza sopra media, migliorare la gestione energetica finale.`,
           trainingPlan: [
-            { week: 1, focus: 'Resistenza base', sessions: ['Corsa 30 min', 'Stretching 20 min', 'Yoga 45 min'] },
-            { week: 2, focus: 'Forza funzionale', sessions: ['HIIT 25 min', 'Pesi corpo 30 min', 'Recovery 20 min'] },
-            { week: 3, focus: 'Intensità progressiva', sessions: ['Interval 35 min', 'Core 20 min', 'Nuoto 30 min'] },
-            { week: 4, focus: 'Picco performance', sessions: ['Test 45 min', 'Defaticamento 30 min', 'Analisi progressi'] },
+            {
+              week: 1,
+              focus: 'Resistenza base',
+              sessions: ['Corsa 30 min', 'Stretching 20 min', 'Yoga 45 min'],
+            },
+            {
+              week: 2,
+              focus: 'Forza funzionale',
+              sessions: ['HIIT 25 min', 'Pesi corpo 30 min', 'Recovery 20 min'],
+            },
+            {
+              week: 3,
+              focus: 'Intensità progressiva',
+              sessions: ['Interval 35 min', 'Core 20 min', 'Nuoto 30 min'],
+            },
+            {
+              week: 4,
+              focus: 'Picco performance',
+              sessions: ['Test 45 min', 'Defaticamento 30 min', 'Analisi progressi'],
+            },
           ],
           suggestions: [
             "Aumenta l'idratazione durante le sessioni ad alta intensità",

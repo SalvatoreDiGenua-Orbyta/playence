@@ -46,7 +46,7 @@ export interface EnrichedPerformance extends PerformanceData {
   n8nEnrichment: {
     processedAt: string;
     workflowId: string;
-    percentileRank: number;             // 0–100: posizione vs altri utenti
+    percentileRank: number; // 0–100: posizione vs altri utenti
     similarEventsComparison: {
       avgScore: number;
       userScore: number;
@@ -58,8 +58,8 @@ export interface EnrichedPerformance extends PerformanceData {
       conditions: string;
     };
     llmInsights: {
-      strengthPoints: string[];         // max 3
-      improvementAreas: string[];       // max 3
+      strengthPoints: string[]; // max 3
+      improvementAreas: string[]; // max 3
       motivationalMessage: string;
     };
   };

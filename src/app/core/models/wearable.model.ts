@@ -11,7 +11,7 @@ export interface WearableReading {
   participantId: string;
   deviceId: string;
   deviceType: 'garmin' | 'apple_watch' | 'polar' | 'fitbit' | 'generic';
-  timestamp: string;      // ISO datetime
+  timestamp: string; // ISO datetime
   heartRate?: number;
   calories?: number;
   distanceKm?: number;

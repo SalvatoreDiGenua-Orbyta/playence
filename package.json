@@ -10,7 +10,8 @@
     "build": "ng build",
     "build:mock": "ng build --configuration=mock",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\""
   },
   "private": true,
   "packageManager": "npm@10.8.2",

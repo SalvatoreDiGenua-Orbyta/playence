@@ -1,7 +1,13 @@
-<div class="min-h-screen bg-background text-text-primary px-4 py-8 md:py-12 animate-fade-in relative overflow-hidden">
+<div
+  class="min-h-screen bg-background text-text-primary px-4 py-8 md:py-12 animate-fade-in relative overflow-hidden"
+>
   <!-- Decorative Background blobs -->
-  <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-  <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
+  <div
+    class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"
+  ></div>
 
   <div class="max-w-6xl mx-auto relative z-10">
     <!-- Navbar Header -->
@@ -16,10 +22,21 @@
         </h1>
       </div>
       <div class="flex gap-4">
-        <button mat-stroked-button color="warn" (click)="goBack()" class="!rounded-xl px-6 font-bold uppercase tracking-wider">
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="goBack()"
+          class="!rounded-xl px-6 font-bold uppercase tracking-wider"
+        >
           Annulla
         </button>
-        <button mat-flat-button color="primary" [disabled]="!eventForm.valid" (click)="onSubmit()" class="!rounded-xl px-8 font-black uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,255,0.3)]">
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!eventForm.valid"
+          (click)="onSubmit()"
+          class="!rounded-xl px-8 font-black uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,255,0.3)]"
+        >
           {{ isEditMode() ? 'Salva Modifiche' : 'Crea Evento' }}
         </button>
       </div>
@@ -29,7 +46,9 @@
       <!-- Left Column: Info Base & Logistica -->
       <div class="space-y-8">
         <!-- Card 1: Info Base -->
-        <section class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative">
+        <section
+          class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative"
+        >
           <div class="flex items-center mb-6">
             <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
               <mat-icon class="text-primary">info</mat-icon>
@@ -39,46 +58,77 @@
 
           <div class="grid grid-cols-1 gap-6 text-left">
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Titolo Evento</label>
-              <input formControlName="title" placeholder="Es: Masterclass Tennis con Mouratoglou"
-                     class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-white/20">
-              <div *ngIf="eventForm.get('title')?.touched && eventForm.get('title')?.invalid" class="text-red-400 text-xs mt-1 ml-1 font-medium">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Titolo Evento</label
+              >
+              <input
+                formControlName="title"
+                placeholder="Es: Masterclass Tennis con Mouratoglou"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-white/20"
+              />
+              <div
+                *ngIf="eventForm.get('title')?.touched && eventForm.get('title')?.invalid"
+                class="text-red-400 text-xs mt-1 ml-1 font-medium"
+              >
                 Il titolo deve contenere almeno 5 caratteri.
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-6">
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Sport</label>
-                <select formControlName="sport" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none">
+                <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                  >Sport</label
+                >
+                <select
+                  formControlName="sport"
+                  class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none"
+                >
                   <option value="" disabled>Seleziona sport</option>
-                  <option *ngFor="let s of sports" [value]="s">{{s}}</option>
+                  <option *ngFor="let s of sports" [value]="s">{{ s }}</option>
                 </select>
               </div>
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Esperienza</label>
-                <select formControlName="experience" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none">
-                  <option *ngFor="let e of experiences" [value]="e">{{e}}</option>
+                <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                  >Esperienza</label
+                >
+                <select
+                  formControlName="experience"
+                  class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none"
+                >
+                  <option *ngFor="let e of experiences" [value]="e">{{ e }}</option>
                 </select>
               </div>
             </div>
 
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Descrizione</label>
-              <textarea formControlName="description" rows="4" placeholder="Descrivi i dettagli dell'evento..."
-                        class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none resize-none transition-all placeholder:text-white/20"></textarea>
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Descrizione</label
+              >
+              <textarea
+                formControlName="description"
+                rows="4"
+                placeholder="Descrivi i dettagli dell'evento..."
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none resize-none transition-all placeholder:text-white/20"
+              ></textarea>
             </div>
 
             <div class="space-y-3">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Tags Suggeriti</label>
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Tags Suggeriti</label
+              >
               <div class="flex flex-wrap gap-2">
-                <button type="button" *ngFor="let t of ['outdoor', 'indoor', 'competitivo', 'tecnica', 'beginner-friendly']"
-                        [class.bg-primary]="eventForm.get('tags')?.value?.includes(t)"
-                        [class.text-background]="eventForm.get('tags')?.value?.includes(t)"
-                        [class.bg-white/5]="!eventForm.get('tags')?.value?.includes(t)"
-                        (click)="toggleTag(t)"
-                        class="px-4 py-2 rounded-full text-xs font-bold transition-all border border-white/5 hover:border-primary/30">
-                  #{{t}}
+                <button
+                  type="button"
+                  *ngFor="
+                    let t of ['outdoor', 'indoor', 'competitivo', 'tecnica', 'beginner-friendly']
+                  "
+                  [class.bg-primary]="eventForm.get('tags')?.value?.includes(t)"
+                  [class.text-background]="eventForm.get('tags')?.value?.includes(t)"
+                  [class.bg-white/5]="!eventForm.get('tags')?.value?.includes(t)"
+                  (click)="toggleTag(t)"
+                  class="px-4 py-2 rounded-full text-xs font-bold transition-all border border-white/5 hover:border-primary/30"
+                >
+                  #{{ t }}
                 </button>
               </div>
             </div>
@@ -86,7 +136,9 @@
         </section>
 
         <!-- Card 2: Logistica -->
-        <section class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative">
+        <section
+          class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative"
+        >
           <div class="flex items-center mb-6">
             <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mr-4">
               <mat-icon class="text-accent">place</mat-icon>
@@ -96,33 +148,67 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Data</label>
-              <input type="date" formControlName="date" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Data</label
+              >
+              <input
+                type="date"
+                formControlName="date"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none"
+              />
             </div>
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Ora Inizio</label>
-              <input type="time" formControlName="startTime" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Ora Inizio</label
+              >
+              <input
+                type="time"
+                formControlName="startTime"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none"
+              />
             </div>
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Durata (min)</label>
-              <input type="number" formControlName="durationMinutes" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Durata (min)</label
+              >
+              <input
+                type="number"
+                formControlName="durationMinutes"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none"
+              />
             </div>
             <div class="space-y-1.5">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Costo (€)</label>
-              <input type="number" formControlName="cost" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Costo (€)</label
+              >
+              <input
+                type="number"
+                formControlName="cost"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none"
+              />
             </div>
             <div class="space-y-1.5 md:col-span-2">
-              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Località / Nome Sede</label>
-              <input type="text" formControlName="location" placeholder="Es: Allianz Cloud, Milano"
-                     class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none">
+              <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+                >Località / Nome Sede</label
+              >
+              <input
+                type="text"
+                formControlName="location"
+                placeholder="Es: Allianz Cloud, Milano"
+                class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-accent/50 outline-none"
+              />
             </div>
             <div class="space-y-1.5 md:col-span-2">
-              <div class="flex items-center justify-between bg-background border border-white/5 rounded-2xl p-4">
+              <div
+                class="flex items-center justify-between bg-background border border-white/5 rounded-2xl p-4"
+              >
                 <div class="flex items-center">
                   <mat-icon class="text-vip-gold mr-3">stars</mat-icon>
                   <div>
                     <div class="text-sm font-bold">Presenza Coach VIP</div>
-                    <div class="text-[10px] text-text-secondary uppercase tracking-wide">Aumenta la visibilità dell'evento</div>
+                    <div class="text-[10px] text-text-secondary uppercase tracking-wide">
+                      Aumenta la visibilità dell'evento
+                    </div>
                   </div>
                 </div>
                 <mat-slide-toggle formControlName="hasVip" color="accent"></mat-slide-toggle>
@@ -135,17 +221,24 @@
       <!-- Right Column: Coach & Wearable -->
       <div class="space-y-8">
         <!-- Card 3: Coach -->
-        <section class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative">
+        <section
+          class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative"
+        >
           <div class="flex items-center mb-6">
             <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mr-4">
               <mat-icon class="text-white">person</mat-icon>
             </div>
             <h2 class="text-xl font-bold">Selezione Coach</h2>
           </div>
-          
+
           <div class="space-y-1.5 text-left">
-            <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1">Assegna un Coach</label>
-            <select formControlName="coachId" class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none">
+            <label class="text-xs font-bold text-text-secondary uppercase tracking-widest ml-1"
+              >Assegna un Coach</label
+            >
+            <select
+              formControlName="coachId"
+              class="w-full bg-background border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none"
+            >
               <option value="" disabled>Seleziona dall'elenco...</option>
               <option value="1">Alessandro Del Piero (Calcio)</option>
               <option value="2">Patrick Mouratoglou (Tennis)</option>
@@ -155,12 +248,18 @@
         </section>
 
         <!-- Card 4: Monitoraggio Wearable -->
-        <section class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative overflow-hidden">
+        <section
+          class="bg-surface-elevated rounded-3xl p-8 border border-white/5 shadow-2xl relative overflow-hidden"
+        >
           <!-- Pulse animation Dot in header -->
           <div class="absolute top-8 right-8" *ngIf="isPolling()">
             <div class="flex items-center">
-              <span class="text-[10px] font-black uppercase tracking-widest text-success mr-2">LIVE ANALYSIS</span>
-              <div class="w-3 h-3 bg-success rounded-full animate-pulse shadow-[0_0_10px_#00e676]"></div>
+              <span class="text-[10px] font-black uppercase tracking-widest text-success mr-2"
+                >LIVE ANALYSIS</span
+              >
+              <div
+                class="w-3 h-3 bg-success rounded-full animate-pulse shadow-[0_0_10px_#00e676]"
+              ></div>
             </div>
           </div>
 
@@ -175,38 +274,54 @@
             <div class="flex items-center justify-between">
               <div>
                 <h3 class="text-sm font-bold text-white">Abilita Tracking Live</h3>
-                <p class="text-xs text-text-secondary">Raccogli metriche dai partecipanti durante l'evento</p>
+                <p class="text-xs text-text-secondary">
+                  Raccogli metriche dai partecipanti durante l'evento
+                </p>
               </div>
-              <mat-slide-toggle formControlName="wearableEnabled" color="primary"></mat-slide-toggle>
+              <mat-slide-toggle
+                formControlName="wearableEnabled"
+                color="primary"
+              ></mat-slide-toggle>
             </div>
 
             <div *ngIf="eventForm.get('wearableEnabled')?.value" class="space-y-6 animate-fade-in">
               <div class="h-px w-full bg-white/5"></div>
 
               <!-- n8n status badge -->
-              <div class="inline-flex items-center bg-[#1a1a0a] border border-[#ffd60033] rounded-lg px-3 py-1.5">
+              <div
+                class="inline-flex items-center bg-[#1a1a0a] border border-[#ffd60033] rounded-lg px-3 py-1.5"
+              >
                 <div class="w-2 h-2 bg-warning rounded-full mr-2"></div>
-                <span class="text-[10px] font-bold text-warning uppercase tracking-widest">n8n Webhook: CONNECTED</span>
+                <span class="text-[10px] font-bold text-warning uppercase tracking-widest"
+                  >n8n Webhook: CONNECTED</span
+                >
               </div>
 
               <!-- Device Discovery Mock -->
               <div class="space-y-3">
-                <label class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1">Dispositivi Rilevati (3)</label>
+                <label
+                  class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1"
+                  >Dispositivi Rilevati (3)</label
+                >
                 <div class="space-y-2">
-                  <div *ngFor="let dev of detectedDevices()" 
-                       class="flex items-center justify-between bg-background border border-white/5 rounded-xl px-4 py-3 hover:border-white/10 transition-colors">
+                  <div
+                    *ngFor="let dev of detectedDevices()"
+                    class="flex items-center justify-between bg-background border border-white/5 rounded-xl px-4 py-3 hover:border-white/10 transition-colors"
+                  >
                     <div class="flex items-center">
                       <mat-icon class="text-text-secondary mr-3 text-sm">devices</mat-icon>
                       <div>
-                        <div class="text-xs font-bold">{{dev.name}}</div>
-                        <div class="text-[10px] text-text-secondary uppercase">{{dev.type}}</div>
+                        <div class="text-xs font-bold">{{ dev.name }}</div>
+                        <div class="text-[10px] text-text-secondary uppercase">{{ dev.type }}</div>
                       </div>
                     </div>
-                    <span [class.text-success]="dev.status === 'connected'"
-                          [class.text-warning]="dev.status === 'pairing'"
-                          [class.text-text-secondary]="dev.status === 'waiting'"
-                          class="text-[9px] font-black uppercase tracking-tighter">
-                      {{dev.status}}
+                    <span
+                      [class.text-success]="dev.status === 'connected'"
+                      [class.text-warning]="dev.status === 'pairing'"
+                      [class.text-text-secondary]="dev.status === 'waiting'"
+                      class="text-[9px] font-black uppercase tracking-tighter"
+                    >
+                      {{ dev.status }}
                     </span>
                   </div>
                 </div>
@@ -214,18 +329,28 @@
 
               <!-- Metric selection -->
               <div class="space-y-3 font-medium">
-                <label class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1">Metriche da raccogliere</label>
+                <label
+                  class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1"
+                  >Metriche da raccogliere</label
+                >
                 <div class="flex flex-wrap gap-2">
-                  <button type="button" *ngFor="let m of availableMetrics"
-                          [class.bg-primary/20]="eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          [class.text-primary]="eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          [class.border-primary/30]="eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          [class.bg-white/5]="!eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          [class.text-text-secondary]="!eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          [class.border-white/5]="!eventForm.get('metricsToCollect')?.value?.includes(m)"
-                          (click)="toggleMetric(m)"
-                          class="px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all border">
-                    {{m}}
+                  <button
+                    type="button"
+                    *ngFor="let m of availableMetrics"
+                    [class.bg-primary/20]="eventForm.get('metricsToCollect')?.value?.includes(m)"
+                    [class.text-primary]="eventForm.get('metricsToCollect')?.value?.includes(m)"
+                    [class.border-primary/30]="
+                      eventForm.get('metricsToCollect')?.value?.includes(m)
+                    "
+                    [class.bg-white/5]="!eventForm.get('metricsToCollect')?.value?.includes(m)"
+                    [class.text-text-secondary]="
+                      !eventForm.get('metricsToCollect')?.value?.includes(m)
+                    "
+                    [class.border-white/5]="!eventForm.get('metricsToCollect')?.value?.includes(m)"
+                    (click)="toggleMetric(m)"
+                    class="px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all border"
+                  >
+                    {{ m }}
                   </button>
                 </div>
               </div>
@@ -233,9 +358,14 @@
               <!-- Polling interval -->
               <div class="grid grid-cols-1 gap-4">
                 <div class="space-y-1.5">
-                  <label class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1">Frequenza Polling</label>
-                  <select formControlName="pollingIntervalSeconds" 
-                          class="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-sm">
+                  <label
+                    class="text-[10px] font-black text-text-secondary uppercase tracking-widest ml-1"
+                    >Frequenza Polling</label
+                  >
+                  <select
+                    formControlName="pollingIntervalSeconds"
+                    class="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-sm"
+                  >
                     <option [value]="5">Ogni 5 secondi (Alta Precisione)</option>
                     <option [value]="15">Ogni 15 secondi (Bilanciato)</option>
                     <option [value]="30">Ogni 30 secondi (Risparmio Energetico)</option>
@@ -246,46 +376,98 @@
               <!-- Live Stats Grid -->
               <div class="grid grid-cols-2 gap-4 mt-6">
                 <!-- FC Card -->
-                <div class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                  <div class="absolute top-2 right-2"><mat-icon class="text-red-500 scale-75">favorite</mat-icon></div>
-                  <div class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Heart Rate</div>
-                  <div class="text-2xl font-black text-white italic">{{ isPolling() ? '142' : '--' }} <span class="text-xs font-normal not-italic text-text-secondary">bpm</span></div>
+                <div
+                  class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group"
+                >
+                  <div class="absolute top-2 right-2">
+                    <mat-icon class="text-red-500 scale-75">favorite</mat-icon>
+                  </div>
+                  <div
+                    class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1"
+                  >
+                    Heart Rate
+                  </div>
+                  <div class="text-2xl font-black text-white italic">
+                    {{ isPolling() ? '142' : '--' }}
+                    <span class="text-xs font-normal not-italic text-text-secondary">bpm</span>
+                  </div>
                 </div>
                 <!-- Calorie Card -->
-                <div class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                  <div class="absolute top-2 right-2"><mat-icon class="text-orange-500 scale-75">local_fire_department</mat-icon></div>
-                  <div class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Calories</div>
-                  <div class="text-2xl font-black text-white italic">{{ isPolling() ? '12.5' : '--' }} <span class="text-xs font-normal not-italic text-text-secondary">kcal</span></div>
+                <div
+                  class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group"
+                >
+                  <div class="absolute top-2 right-2">
+                    <mat-icon class="text-orange-500 scale-75">local_fire_department</mat-icon>
+                  </div>
+                  <div
+                    class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1"
+                  >
+                    Calories
+                  </div>
+                  <div class="text-2xl font-black text-white italic">
+                    {{ isPolling() ? '12.5' : '--' }}
+                    <span class="text-xs font-normal not-italic text-text-secondary">kcal</span>
+                  </div>
                 </div>
                 <!-- Distanza Card -->
-                <div class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                  <div class="absolute top-2 right-2"><mat-icon class="text-primary scale-75">straighten</mat-icon></div>
-                  <div class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Distance</div>
-                  <div class="text-2xl font-black text-white italic">{{ isPolling() ? '0.42' : '--' }} <span class="text-xs font-normal not-italic text-text-secondary">km</span></div>
+                <div
+                  class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group"
+                >
+                  <div class="absolute top-2 right-2">
+                    <mat-icon class="text-primary scale-75">straighten</mat-icon>
+                  </div>
+                  <div
+                    class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1"
+                  >
+                    Distance
+                  </div>
+                  <div class="text-2xl font-black text-white italic">
+                    {{ isPolling() ? '0.42' : '--' }}
+                    <span class="text-xs font-normal not-italic text-text-secondary">km</span>
+                  </div>
                 </div>
                 <!-- Durata Card -->
-                <div class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                  <div class="absolute top-2 right-2"><mat-icon class="text-white scale-75">timer</mat-icon></div>
-                  <div class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Duration</div>
-                  <div class="text-2xl font-black text-white italic">0:{{ isPolling() ? '12' : '00' }} <span class="text-xs font-normal not-italic text-text-secondary">h:m</span></div>
+                <div
+                  class="bg-background border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden group"
+                >
+                  <div class="absolute top-2 right-2">
+                    <mat-icon class="text-white scale-75">timer</mat-icon>
+                  </div>
+                  <div
+                    class="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1"
+                  >
+                    Duration
+                  </div>
+                  <div class="text-2xl font-black text-white italic">
+                    0:{{ isPolling() ? '12' : '00' }}
+                    <span class="text-xs font-normal not-italic text-text-secondary">h:m</span>
+                  </div>
                 </div>
               </div>
 
               <!-- Start/Stop Analysis Button -->
-              <button type="button" (click)="togglePolling()"
-                      [class.!bg-red-500]="isPolling()"
-                      [class.text-white]="isPolling()"
-                      [class.!bg-primary]="!isPolling()"
-                      [class.text-background]="!isPolling()"
-                      class="w-full !rounded-2xl py-6 mt-4 font-black uppercase tracking-[0.2em] shadow-2xl transition-all flex items-center justify-center gap-3">
+              <button
+                type="button"
+                (click)="togglePolling()"
+                [class.!bg-red-500]="isPolling()"
+                [class.text-white]="isPolling()"
+                [class.!bg-primary]="!isPolling()"
+                [class.text-background]="!isPolling()"
+                class="w-full !rounded-2xl py-6 mt-4 font-black uppercase tracking-[0.2em] shadow-2xl transition-all flex items-center justify-center gap-3"
+              >
                 <mat-icon>{{ isPolling() ? 'stop' : 'play_arrow' }}</mat-icon>
                 {{ isPolling() ? 'Ferma Analisi Performance' : 'Avvia Analisi Performance' }}
               </button>
             </div>
 
-            <div *ngIf="!eventForm.get('wearableEnabled')?.value" class="bg-background/50 border border-dashed border-white/10 rounded-2xl p-8 text-center animate-fade-in">
-               <mat-icon class="text-text-secondary/30 scale-150 mb-3">watch_off</mat-icon>
-               <p class="text-sm text-text-secondary/60 italic font-medium">Abilita il tracking per configurare il monitoraggio live dell'evento.</p>
+            <div
+              *ngIf="!eventForm.get('wearableEnabled')?.value"
+              class="bg-background/50 border border-dashed border-white/10 rounded-2xl p-8 text-center animate-fade-in"
+            >
+              <mat-icon class="text-text-secondary/30 scale-150 mb-3">watch_off</mat-icon>
+              <p class="text-sm text-text-secondary/60 italic font-medium">
+                Abilita il tracking per configurare il monitoraggio live dell'evento.
+              </p>
             </div>
           </div>
         </section>
