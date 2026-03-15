@@ -413,7 +413,13 @@ export class PerformanceDetailComponent implements OnInit {
           if (this.isDataVisible()) {
             this.setupTimelines(perf);
             this.loadGroupAverage(perf.eventId, perf);
-            // aiAnalysis is already part of EnrichedPerformance in this mock
+            
+            // Map the enriched data to the aiAnalysis signal expected by the template
+            this.aiAnalysis.set({
+              analysis: perf.aiAnalysis,
+              trainingPlan: perf.trainingPlan,
+              suggestions: perf.suggestions
+            });
           }
           this.isLoading.set(false);
         },
