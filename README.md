@@ -17,13 +17,13 @@ Playence è un'applicazione web innovativa sviluppata in Angular, progettata per
 
 ## 🛠 Stack Tecnologico
 
+- **Backend & Admin Dashboard**: Pannello applicativo dedicato agli amministratori della piattaforma, utilizzato per l'inserimento, la configurazione e la gestione strutturata dei dati anagrafici (es. nuovi sport, creazione di eventi, gestione anagrafiche).
+- **WebAPI**: Il backend espone inoltre delle Web API per tutte le chiamate alle rotte del frontend.
 - **Framework**: Angular v21.2.x (Standalone Components, Signals, esbuild/Vite builder).
 - **UI & Styling**: Tailwind CSS v4, Angular Material per componenti accessibili e design system robusto.
 - **State Management & Reattività**: RxJS v7.8. e utilizzo di Signal.
 - **Mocking & Backend Simulation**: Mirage.js, `@faker-js/faker`.
 - **Data Visualization**: Chart.js interfacciato tramite `ng2-charts` per dashboard e resoconti grafici delle performance.
-- **Backend & Admin Dashboard**: Pannello applicativo dedicato agli amministratori della piattaforma, utilizzato per l'inserimento, la configurazione e la gestione strutturata dei dati anagrafici (es. nuovi sport, creazione di eventi, gestione anagrafiche).
-- **WebAPI**: Il backend espone inoltre delle Web API per tutte le chiamate alle rotte del frontend.
 
 ---
 
@@ -34,6 +34,7 @@ Il backend è una web application sviluppata in ASP.NET Core che espone Web API,
 Si appoggia ad un database relazionale solido e scalabile per la gestione delle informazioni degli utenti, transazioni e dello storico metrico:
 - **Database Relazionale**: Microsoft SQL Server. Scelto per le sue elevate performance ed affidabilità nell'ospitare quantità significative di dati, assicurando robustezza anche in scenari di alto carico e concorrenza.
 - **Struttura Dati**: Le tabelle del database relazionale risultano fedelmente mappate sulle interfacce TypeScript dell'applicativo (visibili all'interno della directory `app/core/models`), mantenendo assoluta congruenza tra i modelli di business esposti a frontend e il layer di persistenza a backend.
+- **Integrazione e Analisi Dati (AI & Wearables)**: Al termine d'esperienza sportiva, il backend si occupa di recuperare i parametri vitali dei partecipanti tramite le **Google Fitness API** insieme alle valutazioni inserite dal coach. Questi dati vengono poi inoltrati a un flusso **n8n** che li elabora e restituisce un JSON strutturato contenente un recap dettagliato e l'analisi dell'Intelligenza Artificiale.
 
 ---
 
