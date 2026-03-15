@@ -1,4 +1,6 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map, startWith } from 'rxjs';
 
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -163,7 +165,7 @@ export class TicketSuccessDialogComponent {
 
               @if (isMultiTicket()) {
                 <div class="mt-6 space-y-6">
-                  @for (ctrl of extraParticipants.controls; track ctrl; let i = $index) {
+                  @for (ctrl of extraParticipants.controls; track i; let i = $index) {
                     <div
                       class="bg-background rounded-2xl p-5 border border-white/5 relative group transition-all"
                     >
@@ -354,10 +356,18 @@ export class TicketPurchaseComponent implements OnInit {
 
   extraParticipants = this.fb.array([]);
 
-  totalTickets = computed(() => 1 + this.extraParticipants.length);
+  totalTickets = toSignal(
+    this.extraParticipants.valueChanges.pipe(
+      map(values => 1 + values.length),
+      startWith(1 + this.extraParticipants.length)
+    ),
+    { initialValue: 1 + this.extraParticipants.length }
+  );
+
   subtotal = computed(() => {
     const ev = this.event();
-    return ev ? ev.cost * this.totalTickets() : 0;
+    const count = this.totalTickets() ?? 1;
+    return ev ? ev.cost * count : 0;
   });
   serviceFee = computed(() => {
     return Math.round(this.subtotal() * 0.05 * 100) / 100;
