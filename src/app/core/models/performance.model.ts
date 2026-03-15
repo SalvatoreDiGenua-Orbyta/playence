@@ -32,3 +32,40 @@ export interface AiAnalysisResponse {
   trainingPlan: TrainingPlan[];
   suggestions: string[];
 }
+export interface EnrichedPerformance extends PerformanceData {
+  // Dati wearable aggregati dalla sessione
+  wearableData: {
+    sessionId: string;
+    readingsCount: number;
+    deviceTypes: string[];
+    heartRateTimeline: { minute: number; bpm: number }[];
+    caloriesTimeline: { minute: number; kcal: number }[];
+  };
+
+  // Elaborati da n8n
+  n8nEnrichment: {
+    processedAt: string;
+    workflowId: string;
+    percentileRank: number;             // 0–100: posizione vs altri utenti
+    similarEventsComparison: {
+      avgScore: number;
+      userScore: number;
+      delta: number;
+    };
+    weatherConditions?: {
+      temperature: number;
+      humidity: number;
+      conditions: string;
+    };
+    llmInsights: {
+      strengthPoints: string[];         // max 3
+      improvementAreas: string[];       // max 3
+      motivationalMessage: string;
+    };
+  };
+
+  // Già esistenti
+  aiAnalysis: string;
+  trainingPlan: TrainingPlan[];
+  suggestions: string[];
+}

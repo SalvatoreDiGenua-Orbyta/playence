@@ -1,3 +1,5 @@
+import { WearableMetric } from './wearable.model';
+
 export interface Coach {
   id: string;
   name: string;
@@ -25,6 +27,12 @@ export interface SportEvent {
   coverImage: string;
   tags: string[];
   coach: Coach;
+  status: 'draft' | 'published' | 'cancelled' | 'completed';
+  // Nuovi campi per il monitoraggio wearable:
+  wearableEnabled: boolean;
+  pollingIntervalSeconds: number;     // 5 | 10 | 30
+  metricsToCollect: WearableMetric[];
+  participantIds: string[];
 }
 
 export interface EventFilters {
