@@ -1,4 +1,6 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map, startWith } from 'rxjs';
 
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -31,10 +33,19 @@ import { DatePipe } from '@angular/common';
       <h2 class="text-2xl font-black text-white mb-2">Prenotazione Confermata!</h2>
       <p class="text-text-secondary mb-4 text-sm">Il tuo codice prenotazione è:</p>
       <div
-        class="bg-background py-3 px-4 rounded-xl border border-white/5 font-mono text-2xl text-primary font-bold tracking-widest mb-6"
+        class="bg-background py-3 px-4 rounded-xl border border-white/5 font-mono text-2xl text-primary font-bold tracking-widest mb-4"
       >
         {{ data.code }}
       </div>
+      
+      <div class="bg-white p-3 rounded-2xl inline-block mb-6 shadow-inner border border-white/10 group">
+        <img 
+          [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + data.code" 
+          alt="QR Code Prenotazione"
+          class="w-32 h-32 block rounded-lg group-hover:scale-105 transition-transform"
+        />
+      </div>
+
       <button
         mat-flat-button
         color="primary"
@@ -163,7 +174,7 @@ export class TicketSuccessDialogComponent {
 
               @if (isMultiTicket()) {
                 <div class="mt-6 space-y-6">
-                  @for (ctrl of extraParticipants.controls; track ctrl; let i = $index) {
+                  @for (ctrl of extraParticipants.controls; track i; let i = $index) {
                     <div
                       class="bg-background rounded-2xl p-5 border border-white/5 relative group transition-all"
                     >
@@ -354,10 +365,18 @@ export class TicketPurchaseComponent implements OnInit {
 
   extraParticipants = this.fb.array([]);
 
-  totalTickets = computed(() => 1 + this.extraParticipants.length);
+  totalTickets = toSignal(
+    this.extraParticipants.valueChanges.pipe(
+      map(values => 1 + values.length),
+      startWith(1 + this.extraParticipants.length)
+    ),
+    { initialValue: 1 + this.extraParticipants.length }
+  );
+
   subtotal = computed(() => {
     const ev = this.event();
-    return ev ? ev.cost * this.totalTickets() : 0;
+    const count = this.totalTickets() ?? 1;
+    return ev ? ev.cost * count : 0;
   });
   serviceFee = computed(() => {
     return Math.round(this.subtotal() * 0.05 * 100) / 100;

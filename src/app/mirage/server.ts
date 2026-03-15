@@ -9,6 +9,8 @@ export function makeServer() {
       coach: Model.extend({}),
       ticket: Model.extend({ user: belongsTo(), event: belongsTo() }),
       performance: Model.extend({ user: belongsTo(), event: belongsTo() }),
+      wearableSession: Model.extend({ event: belongsTo() }),
+      wearableReading: Model.extend({ session: belongsTo(), participant: belongsTo() }),
     },
 
     factories: {
@@ -200,6 +202,41 @@ export function makeServer() {
           coachComment: 'Buon ritmo nella prima metà ma calo vistoso alla fine. Attenzione a bilanciare lo sforzo.',
           aiAnalysis: 'Dispendio energetico elevato con picchi in fascia anaerobica ripetuti. Suggerito un lavoro specifico per migliorare la tolleranza all\'acido lattico.'
         } as any);
+
+        // Evento 3: DEMO PRESENTAZIONE (Wearable configurato)
+        const demoEvent = server.create('event', {
+          title: 'CrossFit Games Prep: Intensità Pro',
+          sport: 'CrossFit',
+          cost: 45,
+          date: new Date().toISOString(),
+          duration: 120,
+          location: 'CrossFit Milan, Italia',
+          experience: 'Agonistico',
+          hasVip: false,
+          maxParticipants: 12,
+          currentParticipants: 10,
+          description: 'Sessione ad altissima intensità focalizzata sulla preparazione ai Games. Monitoraggio biometria in tempo reale.',
+          coverImage: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800',
+          status: 'published',
+          wearableEnabled: true,
+          pollingIntervalSeconds: 5,
+          metricsToCollect: ['heartRate', 'calories', 'performanceScore', 'oxygenSaturation'],
+          participantIds: [testUser.id]
+        } as any);
+
+        server.create('performance', {
+          userId: testUser.id,
+          eventId: demoEvent.id,
+          date: new Date().toISOString(),
+          performanceScore: 94,
+          heartRateAvg: 165,
+          heartRateMax: 192,
+          caloriesBurned: 1100,
+          distanceKm: 0,
+          durationMinutes: 60,
+          coachComment: 'Performance eccezionale. Hai mantenuto un\'intensità altissima per tutta la durata del WOD.',
+          aiAnalysis: 'Dati indicanti una condizione atletica di picco. Il recupero tra gli intervalli è migliorato del 15% rispetto all\'ultima sessione CrossFit registrata.'
+        } as any);
       }
     },
 
@@ -310,6 +347,118 @@ export function makeServer() {
 
       this.get('/coaches', (schema: any) => schema.all('coach'));
       this.get('/coaches/:id', (schema: any, request) => schema.find('coach', request.params['id']));
+
+      // Wearable routes
+      this.post('/wearable/sessions', (schema: any, request) => {
+        const { eventId, pollingIntervalSeconds } = JSON.parse(request.requestBody);
+        return schema.create('wearableSession', {
+          eventId,
+          pollingIntervalSeconds,
+          startedAt: new Date().toISOString(),
+          status: 'active',
+        });
+      });
+
+      this.patch('/wearable/sessions/:id', (schema: any, request) => {
+        const attrs = JSON.parse(request.requestBody);
+        const session = schema.find('wearableSession', request.params['id']);
+        session.update(attrs);
+        return session;
+      });
+
+      this.post('/wearable/readings', (schema: any, request) => {
+        const { sessionId, readings } = JSON.parse(request.requestBody);
+        const saved = readings.map((r: any) =>
+          schema.create('wearableReading', { ...r, sessionId, timestamp: new Date().toISOString() })
+        );
+        return { saved: saved.length };
+      });
+
+      this.get('/wearable/sessions/:id/aggregate', (schema: any, request) => {
+        const readings = schema.where('wearableReading', { sessionId: request.params['id'] }).models;
+        if (!readings.length) return { participantsCount: 0, heartRateAvg: 0, caloriesTotal: 0, distanceTotal: 0, durationMinutes: 0 };
+
+        const firstReading = readings[0];
+        const participantsCount = [...new Set(readings.map((r: any) => r.participantId))].length;
+        const heartRateAvg = Math.round(readings.reduce((s: number, r: any) => s + (r.heartRate || 0), 0) / readings.length);
+        const caloriesTotal = Math.round(readings.reduce((s: number, r: any) => s + (r.calories || 0), 0));
+        const distanceTotal = +(readings.reduce((s: number, r: any) => s + (r.distanceKm || 0), 0)).toFixed(2);
+        const durationMinutes = Math.round((Date.now() - new Date(firstReading.timestamp).getTime()) / 60000);
+
+        return {
+          participantsCount,
+          heartRateAvg,
+          caloriesTotal,
+          distanceTotal,
+          durationMinutes,
+        };
+      });
+
+      // Enriched Performance (Mocking n8n flow)
+      this.get('/performances/:id/enriched', (schema: any, request) => {
+        const performance = schema.find('performance', request.params['id']);
+        const session = schema.where('wearableSession', { eventId: performance.eventId }).models[0];
+        const readings = session
+          ? schema.where('wearableReading', { sessionId: session.id }).models
+          : [];
+
+        return {
+          ...performance.attrs,
+          wearableData: {
+            sessionId: session?.id || null,
+            readingsCount: readings.length,
+            deviceTypes: ['garmin', 'apple_watch'],
+            heartRateTimeline: Array.from({ length: 12 }, (_, i) => ({
+              minute: i * 10,
+              bpm: 120 + Math.round(Math.random() * 40),
+            })),
+            caloriesTimeline: Array.from({ length: 12 }, (_, i) => ({
+              minute: i * 10,
+              kcal: Math.round(i * 15 + Math.random() * 10),
+            })),
+          },
+          n8nEnrichment: {
+            processedAt: new Date().toISOString(),
+            workflowId: 'wf_performance_analysis_v2',
+            percentileRank: Math.round(60 + Math.random() * 30),
+            similarEventsComparison: {
+              avgScore: 72,
+              userScore: performance.performanceScore,
+              delta: performance.performanceScore - 72,
+            },
+            weatherConditions: {
+              temperature: 22,
+              humidity: 58,
+              conditions: 'Soleggiato',
+            },
+            llmInsights: {
+              strengthPoints: [
+                'Resistenza cardiovascolare superiore alla media del gruppo',
+                'Ottima consistenza nella fase centrale della sessione',
+                'Recupero post-sforzo nella norma per il livello dichiarato',
+              ],
+              improvementAreas: [
+                'La frequenza cardiaca picco supera la soglia aerobica consigliata',
+                'Calo di rendimento nelle ultime 2 sessioni registrate',
+                'Distanza percorsa inferiore alla media degli eventi simili',
+              ],
+              motivationalMessage: 'Ottima sessione! Sei nel top 30% dei partecipanti a eventi di questo tipo.',
+            },
+          },
+          aiAnalysis: `Analisi AI: score ${performance.performanceScore}/100. Resistenza sopra media, migliorare la gestione energetica finale.`,
+          trainingPlan: [
+            { week: 1, focus: 'Resistenza base', sessions: ['Corsa 30 min', 'Stretching 20 min', 'Yoga 45 min'] },
+            { week: 2, focus: 'Forza funzionale', sessions: ['HIIT 25 min', 'Pesi corpo 30 min', 'Recovery 20 min'] },
+            { week: 3, focus: 'Intensità progressiva', sessions: ['Interval 35 min', 'Core 20 min', 'Nuoto 30 min'] },
+            { week: 4, focus: 'Picco performance', sessions: ['Test 45 min', 'Defaticamento 30 min', 'Analisi progressi'] },
+          ],
+          suggestions: [
+            "Aumenta l'idratazione durante le sessioni ad alta intensità",
+            'Incorpora 10 min di respirazione diaframmatica post-allenamento',
+            'Aggiungi 1 giorno di recupero attivo a settimana',
+          ],
+        };
+      });
     },
   });
 }
